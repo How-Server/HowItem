@@ -32,7 +32,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation files('build/dependencies/ItsOurs-1.3.3-mc-1.20.1.jar')
+	modImplementation files('dependencies/ItsOurs-1.3.3-mc-1.20.1.jar')
 }
 
 processResources {
