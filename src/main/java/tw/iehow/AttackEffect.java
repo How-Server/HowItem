@@ -33,7 +33,7 @@ public class AttackEffect implements ModInitializer {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-			if (claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY)) {
+			if (claim.isPresent() && (!claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY) || !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP))) {
 				return ActionResult.FAIL;
 			}
 
