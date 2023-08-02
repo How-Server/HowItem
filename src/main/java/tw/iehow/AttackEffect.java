@@ -6,6 +6,7 @@ import me.drex.itsours.claim.permission.PermissionManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,7 @@ public class AttackEffect implements ModInitializer {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-			if (claim.isPresent() && (!claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY) || !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP))) {
+			if (claim.isPresent() && (!claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY) || !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)) ) {
 				return ActionResult.FAIL;
 			}
 
@@ -57,7 +58,7 @@ public class AttackEffect implements ModInitializer {
 			}
 
 			//HowItem:Black_Katana
-			if (isValid(mainHand, "minecraft:netherite_sword", 1337004) ) {
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337004) && !(entity instanceof EnderDragonPart)) {
 				LivingEntity livingEntity = (LivingEntity) entity;
 				livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1, false, false));
 				livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 300, 1, false, false));
