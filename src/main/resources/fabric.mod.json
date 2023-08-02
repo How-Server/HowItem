@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "howitem",
+	"version": "${version}",
+	"name": "HowItem",
+	"description": "Custom effect for item of How-Server!",
+	"authors": [
+		"Howie"
+	],
+	"contact": {
+		"homepage": "https://play.iehow.tw/",
+		"sources": "https://github.com/Howie0715/HowItem"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/modid/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"tw.iehow.AttackEffect"
+		]
+	},
+	"mixins": [
+		"modid.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
