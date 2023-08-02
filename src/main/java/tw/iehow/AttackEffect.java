@@ -25,44 +25,67 @@ import static tw.iehow.SlotCheck.isValid;
 
 public class AttackEffect implements ModInitializer {
 	//Log for CD
-	private final Map<UUID, Long> SKcooldown = new HashMap<>();
+	private final Map<UUID, Long> cooldown = new HashMap<>();
 
 	@Override
 	public void onInitialize() {
-	AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-		ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
-		//Claim Permission
-		Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-		if (claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY)) {
-			return ActionResult.FAIL;
-		}
-
-		//Timestamp for CD
-		UUID playerUuid = player.getUuid();
-		long lastUsedTime = SKcooldown.getOrDefault(playerUuid, 0L);
-		long currentTime = world.getTime();
-		int cooldownTime = 120;
-
-		//Get MainHand_Item
-		ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
-
-		//HowItem:Sakura_Katana
-		if (currentTime - lastUsedTime >= cooldownTime) {
-			if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
-				player.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1, 1, false, false));
-				showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY()+1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
-				SKcooldown.put(playerUuid, currentTime);
+		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
+			//Claim Permission
+			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
+			if (claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY)) {
+				return ActionResult.FAIL;
 			}
-		}
 
-		//HowItem:Black_Katana
-		if (isValid(mainHand, "minecraft:netherite_sword", 1337004) ) {
-			LivingEntity livingEntity = (LivingEntity) entity;
-			livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1, false, false));
-			livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 300, 1, false, false));
-		}
-		return ActionResult.PASS;
-	});
+			//Timestamp for CD
+			UUID playerUuid = player.getUuid();
+			long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
+			long currentTime = world.getTime();
+			int SKcooldownTime = 120;
+			int KBcooldownTime = 300;
+
+			//Get MainHand_Item
+			ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
+
+			//HowItem:Sakura_Katana
+			if (currentTime - lastUsedTime >= SKcooldownTime) {
+				if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
+					player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
+					showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
+					cooldown.put(playerUuid, currentTime);
+				}
+			}
+
+			//HowItem:Black_Katana
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337004) ) {
+				LivingEntity livingEntity = (LivingEntity) entity;
+				livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1, false, false));
+				livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 300, 1, false, false));
+			}
+
+			//HowItem:KeyBoard
+			if (currentTime - lastUsedTime >= KBcooldownTime) {
+				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) ) {
+					LivingEntity livingEntity = (LivingEntity) entity;
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
+					cooldown.put(playerUuid, currentTime);
+				}
+				else if (isValid(mainHand, "minecraft:netherite_sword", 1337016) ) {
+					LivingEntity livingEntity = (LivingEntity) entity;
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
+					cooldown.put(playerUuid, currentTime);
+				}
+				else if (isValid(mainHand, "minecraft:netherite_sword", 1337017) ) {
+					LivingEntity livingEntity = (LivingEntity) entity;
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
+					cooldown.put(playerUuid, currentTime);
+				}
+			}
+			return ActionResult.PASS;
+		});
 	}
 
 }
