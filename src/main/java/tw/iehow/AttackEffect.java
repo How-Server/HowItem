@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -21,8 +20,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static tw.iehow.SlotCheck.isValid;
 import static tw.iehow.PlayerParticle.showParticle;
+import static tw.iehow.SlotCheck.isValid;
 
 public class AttackEffect implements ModInitializer {
 	//Log for CD
@@ -52,7 +51,6 @@ public class AttackEffect implements ModInitializer {
 			if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
 				player.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1, 1, false, false));
 				showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY()+1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
-				ServerPlayer.networkHandler.sendPacket(new ParticleS2CPacket(ParticleTypes.HEART, false, player.getX(), player.getY()+1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5));
 				SKcooldown.put(playerUuid, currentTime);
 			}
 		}
