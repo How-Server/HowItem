@@ -65,7 +65,7 @@ public class AttackEffect implements ModInitializer {
 			}
 
 			//HowItem:KeyBoard
-			if (currentTime - lastUsedTime >= KBcooldownTime) {
+			if (currentTime - lastUsedTime >= KBcooldownTime && !(entity instanceof EnderDragonPart)) {
 				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) ) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
