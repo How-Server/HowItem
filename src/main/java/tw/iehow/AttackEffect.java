@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -34,7 +35,10 @@ public class AttackEffect implements ModInitializer {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-			if (claim.isPresent() && (!claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY) || !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)) ) {
+			if (claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY)) {
+				return ActionResult.FAIL;
+			}
+			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)){
 				return ActionResult.FAIL;
 			}
 
