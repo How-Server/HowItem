@@ -4,9 +4,11 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,26 +17,29 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static tw.iehow.PlayerParticle.showParticle;
 import static tw.iehow.SlotCheck.isValid;
 
 @Mixin(PlayerEntity.class)
 public class HandHeldEffect {
+    @Unique
     private boolean absorptionEffect = false;
 
     //Log for CD
+    @Unique
     private final Map<UUID, Long> cooldown = new HashMap<>();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo info) {
         //Get player info
         PlayerEntity player = ((PlayerEntity)(Object)this);
+        ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
         ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
         UUID playerUuid = player.getUuid();
 
         //Timestamp for CD
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
         long currentTime = player.getWorld().getTime();
-        int cooldownTime = 300;
 
         //Detect the usage of absorption
         float absorptionAmount = player.getAbsorptionAmount();
@@ -54,7 +59,7 @@ public class HandHeldEffect {
 
         //HowItem:red_omamori
         if (isValid(offHand,"minecraft:totem_of_undying",1337001)) {
-            if (currentTime - lastUsedTime >= cooldownTime && !absorptionEffect) {
+            if (currentTime - lastUsedTime >= 300 && !absorptionEffect) {
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, -1, 3, false, false));
                 absorptionAmount = 1.0F;
                 absorptionEffect = true;
@@ -71,6 +76,15 @@ public class HandHeldEffect {
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 25, 1, false, false));
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 25, 1, false, false));
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 25, 1, false, false));
+        }
+
+        //HowItem:chinese_valentines_2023/red_rose
+        if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)) {
+            if (currentTime - lastUsedTime >= 200) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 80, 2, false, false));
+                showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
+                cooldown.put(playerUuid, currentTime);
+            }
         }
     }
 }
