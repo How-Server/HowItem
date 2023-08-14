@@ -3,6 +3,7 @@ package tw.iehow;
 import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.ClaimList;
 import me.drex.itsours.claim.permission.PermissionManager;
+import me.drex.itsours.claim.permission.node.Node;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.entity.LivingEntity;
@@ -12,6 +13,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -35,7 +37,7 @@ public class AttackEffect implements ModInitializer {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY)) {
+			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
 				return ActionResult.FAIL;
 			}
 			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)){
