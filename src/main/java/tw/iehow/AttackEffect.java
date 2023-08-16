@@ -6,6 +6,8 @@ import me.drex.itsours.claim.permission.PermissionManager;
 import me.drex.itsours.claim.permission.node.Node;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -72,24 +74,19 @@ public class AttackEffect implements ModInitializer {
 
 			//HowItem:KeyBoard
 			if (currentTime - lastUsedTime >= KBcooldownTime && !(entity instanceof EnderDragonPart)) {
-				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) ) {
+				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017) ) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
 					cooldown.put(playerUuid, currentTime);
 				}
-				else if (isValid(mainHand, "minecraft:netherite_sword", 1337016) ) {
-					LivingEntity livingEntity = (LivingEntity) entity;
-					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
-					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
-					cooldown.put(playerUuid, currentTime);
-				}
-				else if (isValid(mainHand, "minecraft:netherite_sword", 1337017) ) {
-					LivingEntity livingEntity = (LivingEntity) entity;
-					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
-					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
-					cooldown.put(playerUuid, currentTime);
-				}
+			}
+			return ActionResult.PASS;
+		});
+
+		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+			if(entity.getType() == EntityType.VILLAGER && entity.getCommandTags().contains("official")){
+					player.removeStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE);
 			}
 			return ActionResult.PASS;
 		});
