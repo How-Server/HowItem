@@ -81,6 +81,18 @@ public class AttackEffect implements ModInitializer {
 					cooldown.put(playerUuid, currentTime);
 				}
 			}
+
+			//HowItem:how_wine
+			if (currentTime - lastUsedTime >= 120 && !(entity instanceof EnderDragonPart)) {
+				if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015)) {
+					LivingEntity livingEntity = (LivingEntity) entity;
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 120, 1, false, false));
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 120, 1, false, false));
+					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 60, 1, false, false));
+					showParticle(ServerPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
+					cooldown.put(playerUuid, currentTime);
+				}
+			}
 			return ActionResult.PASS;
 		});
 
