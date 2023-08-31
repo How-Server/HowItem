@@ -1,4 +1,4 @@
-package tw.iehow;
+package tw.iehow.util;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -26,8 +26,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static tw.iehow.PlayerParticle.showParticle;
-import static tw.iehow.SlotCheck.isValid;
+import static tw.iehow.util.PlayerParticle.showParticle;
+import static tw.iehow.util.SlotCheck.isValid;
+import static tw.iehow.util.PlayerTitle.showTitle;
 
 public class AttackEffect implements ModInitializer {
 	//Log for CD
@@ -50,14 +51,12 @@ public class AttackEffect implements ModInitializer {
 			UUID playerUuid = player.getUuid();
 			long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
 			long currentTime = world.getTime();
-			int SKcooldownTime = 120;
-			int KBcooldownTime = 300;
-
+			long interval = currentTime - lastUsedTime;
 			//Get MainHand_Item
 			ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
 
 			//HowItem:Sakura_Katana
-			if (currentTime - lastUsedTime >= SKcooldownTime) {
+			if (interval >= 120) {
 				if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
 					player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
 					showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
@@ -73,17 +72,19 @@ public class AttackEffect implements ModInitializer {
 			}
 
 			//HowItem:KeyBoard
-			if (currentTime - lastUsedTime >= KBcooldownTime && !(entity instanceof EnderDragonPart)) {
+			if (interval >= 300 && !(entity instanceof EnderDragonPart)) {
 				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017) ) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
 					cooldown.put(playerUuid, currentTime);
 				}
+			}else {
+				showTitle(ServerPlayer,(300 - interval) / 20);
 			}
 
 			//HowItem:how_wine
-			if (currentTime - lastUsedTime >= 120 && !(entity instanceof EnderDragonPart)) {
+			if (interval >= 120 && !(entity instanceof EnderDragonPart)) {
 				if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015)) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 120, 1, false, false));
@@ -92,6 +93,8 @@ public class AttackEffect implements ModInitializer {
 					showParticle(ServerPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
 					cooldown.put(playerUuid, currentTime);
 				}
+			}else {
+				showTitle((ServerPlayerEntity) player,(120 - interval) / 20);
 			}
 			return ActionResult.PASS;
 		});

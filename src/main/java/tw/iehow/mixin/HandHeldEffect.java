@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.PlayerParticle.showParticle;
-import static tw.iehow.SlotCheck.isValid;
+import static tw.iehow.util.PlayerParticle.showParticle;
+import static tw.iehow.util.SlotCheck.isValid;
 
 @Mixin(PlayerEntity.class)
 public class HandHeldEffect {

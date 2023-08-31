@@ -1,4 +1,4 @@
-package tw.iehow;
+package tw.iehow.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
