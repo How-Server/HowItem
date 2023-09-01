@@ -38,6 +38,8 @@ public class AttackEffect implements ModInitializer {
 	public void onInitialize() {
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
+			ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
+
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
 			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
@@ -52,15 +54,15 @@ public class AttackEffect implements ModInitializer {
 			long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
 			long currentTime = world.getTime();
 			long interval = currentTime - lastUsedTime;
-			//Get MainHand_Item
-			ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
 
 			//HowItem:Sakura_Katana
-			if (interval >= 120) {
-				if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
+				if (interval >= 120) {
 					player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
 					showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
 					cooldown.put(playerUuid, currentTime);
+				}else {
+					showTitle(ServerPlayer,120 - interval);
 				}
 			}
 
@@ -72,20 +74,20 @@ public class AttackEffect implements ModInitializer {
 			}
 
 			//HowItem:KeyBoard
-			if (interval >= 300 && !(entity instanceof EnderDragonPart)) {
-				if (isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017) ) {
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017)) {
+				if (interval >= 300 && !(entity instanceof EnderDragonPart)) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 150, 1, false, false));
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
 					cooldown.put(playerUuid, currentTime);
+				} else {
+					showTitle(ServerPlayer,300 - interval);
 				}
-			}else {
-				showTitle(ServerPlayer,(300 - interval) / 20);
 			}
 
 			//HowItem:how_wine
-			if (interval >= 120 && !(entity instanceof EnderDragonPart)) {
-				if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015)) {
+			if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015)) {
+				if (interval >= 120 && !(entity instanceof EnderDragonPart)) {
 					LivingEntity livingEntity = (LivingEntity) entity;
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 120, 1, false, false));
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 120, 1, false, false));
@@ -94,7 +96,7 @@ public class AttackEffect implements ModInitializer {
 					cooldown.put(playerUuid, currentTime);
 				}
 			}else {
-				showTitle((ServerPlayerEntity) player,(120 - interval) / 20);
+				showTitle(ServerPlayer,120 - interval);
 			}
 			return ActionResult.PASS;
 		});
@@ -106,5 +108,4 @@ public class AttackEffect implements ModInitializer {
 			return ActionResult.PASS;
 		});
 	}
-
 }

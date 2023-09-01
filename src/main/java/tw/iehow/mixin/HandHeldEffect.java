@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import static tw.iehow.util.PlayerParticle.showParticle;
 import static tw.iehow.util.SlotCheck.isValid;
+import static tw.iehow.util.PlayerTitle.showTitle;
 
 @Mixin(PlayerEntity.class)
 public class HandHeldEffect {
@@ -35,11 +36,12 @@ public class HandHeldEffect {
         PlayerEntity player = ((PlayerEntity)(Object)this);
         ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
         ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
-        UUID playerUuid = player.getUuid();
 
         //Timestamp for CD
+        UUID playerUuid = player.getUuid();
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
         long currentTime = player.getWorld().getTime();
+        long interval = currentTime - lastUsedTime;
 
         //Detect the usage of absorption
         float absorptionAmount = player.getAbsorptionAmount();
@@ -59,10 +61,12 @@ public class HandHeldEffect {
 
         //HowItem:red_omamori
         if (isValid(offHand,"minecraft:totem_of_undying",1337001)) {
-            if (currentTime - lastUsedTime >= 300 && !absorptionEffect) {
+            if (interval >= 300 && !absorptionEffect) {
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, -1, 3, false, false));
                 absorptionAmount = 1.0F;
                 absorptionEffect = true;
+            }else {
+                showTitle(ServerPlayer, 300 - interval);
             }
         }
         if (absorptionEffect && (!isValid(offHand,"minecraft:totem_of_undying",1337001) || absorptionAmount == 0.0F)){
@@ -80,10 +84,12 @@ public class HandHeldEffect {
 
         //HowItem:chinese_valentines_2023/red_rose
         if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)) {
-            if (currentTime - lastUsedTime >= 200) {
+            if (interval >= 200) {
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 80, 2, false, false));
                 showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
                 cooldown.put(playerUuid, currentTime);
+            }else {
+                showTitle(ServerPlayer, 200 - interval);
             }
         }
     }

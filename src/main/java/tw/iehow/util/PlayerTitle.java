@@ -6,6 +6,6 @@ import net.minecraft.util.Formatting;
 
 public class PlayerTitle {
     public static void showTitle(ServerPlayerEntity player, long CD) {
-        player.sendMessage(Text.literal("還有CD " + CD + " 秒").formatted(Formatting.YELLOW),true);
+        player.sendMessage(Text.literal("還有CD " + CD / 20 + " 秒").formatted(Formatting.YELLOW),true);
     }
 }
