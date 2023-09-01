@@ -66,7 +66,9 @@ public class HandHeldEffect {
                 absorptionAmount = 1.0F;
                 absorptionEffect = true;
             }else {
-                showTitle(ServerPlayer, 300 - interval);
+                if (300 - interval >= 0){
+                    showTitle(ServerPlayer, 300 - interval);
+                }
             }
         }
         if (absorptionEffect && (!isValid(offHand,"minecraft:totem_of_undying",1337001) || absorptionAmount == 0.0F)){
