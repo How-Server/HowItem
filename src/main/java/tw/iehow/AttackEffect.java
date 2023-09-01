@@ -45,7 +45,7 @@ public class AttackEffect implements ModInitializer {
 			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
 				return ActionResult.FAIL;
 			}
-			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)){
+			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)) {
 				return ActionResult.FAIL;
 			}
 
@@ -61,8 +61,8 @@ public class AttackEffect implements ModInitializer {
 					player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
 					showParticle(ServerPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
 					cooldown.put(playerUuid, currentTime);
-				}else {
-					showTitle(ServerPlayer,120 - interval);
+				} else {
+					showTitle(ServerPlayer, 120 - interval);
 				}
 			}
 
@@ -81,7 +81,7 @@ public class AttackEffect implements ModInitializer {
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 1, false, false));
 					cooldown.put(playerUuid, currentTime);
 				} else {
-					showTitle(ServerPlayer,300 - interval);
+					showTitle(ServerPlayer, 300 - interval);
 				}
 			}
 
@@ -94,10 +94,10 @@ public class AttackEffect implements ModInitializer {
 					livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 60, 1, false, false));
 					showParticle(ServerPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
 					cooldown.put(playerUuid, currentTime);
+				} else {
+					showTitle(ServerPlayer, 120 - interval);
 				}
-			}else {
-				showTitle(ServerPlayer,120 - interval);
-			}
+		}
 			return ActionResult.PASS;
 		});
 
