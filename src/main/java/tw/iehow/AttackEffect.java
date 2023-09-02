@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,8 +28,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static tw.iehow.util.PlayerParticle.showParticle;
-import static tw.iehow.util.SlotCheck.isValid;
 import static tw.iehow.util.PlayerTitle.showTitle;
+import static tw.iehow.util.SlotCheck.isValid;
 
 public class AttackEffect implements ModInitializer {
 	//Log for CD
@@ -39,15 +40,12 @@ public class AttackEffect implements ModInitializer {
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			ServerPlayerEntity ServerPlayer = (ServerPlayerEntity) player;
 			ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
-
+			//Entity Type
+			if (!entity.isLiving() || (entity instanceof ArmorStandEntity)){return ActionResult.PASS;}
 			//Claim Permission
 			Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
-				return ActionResult.FAIL;
-			}
-			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)) {
-				return ActionResult.FAIL;
-			}
+			if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {return ActionResult.FAIL;}
+			if ((entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP)) {return ActionResult.FAIL;}
 
 			//Timestamp for CD
 			UUID playerUuid = player.getUuid();
@@ -97,7 +95,7 @@ public class AttackEffect implements ModInitializer {
 				} else {
 					showTitle(ServerPlayer, 120 - interval);
 				}
-		}
+			}
 			return ActionResult.PASS;
 		});
 
