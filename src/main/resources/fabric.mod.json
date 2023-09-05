@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"tw.iehow.AttackEffect"
+          "tw.iehow.HowItem"
 		]
 	},
 	"mixins": [
