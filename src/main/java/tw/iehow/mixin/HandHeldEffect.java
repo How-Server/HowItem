@@ -61,10 +61,10 @@ public abstract class HandHeldEffect {
 
         //HowItem:purple_omamori
         if (isValid(offHand,"minecraft:flower_banner_pattern",1337002)) {
-            player.removeStatusEffect(StatusEffects.HUNGER);
-            player.removeStatusEffect(StatusEffects.DARKNESS);
-            player.removeStatusEffect(StatusEffects.POISON);
-            player.removeStatusEffect(StatusEffects.WITHER);
+            PotionEffect.remove(player, StatusEffects.HUNGER);
+            PotionEffect.remove(player, StatusEffects.DARKNESS);
+            PotionEffect.remove(player, StatusEffects.POISON);
+            PotionEffect.remove(player, StatusEffects.WITHER);
         }
 
         //HowItem:red_omamori
