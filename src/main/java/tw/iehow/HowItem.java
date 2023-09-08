@@ -4,9 +4,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.util.ActionResult;
-import tw.iehow.util.ClaimCheck;
-import tw.iehow.util.EffectCheck;
-import tw.iehow.util.EntityCheck;
+import net.minecraft.util.Hand;
+import tw.iehow.util.check.ClaimCheck;
+import tw.iehow.util.check.EffectCheck;
+import tw.iehow.util.check.EntityCheck;
+
+import static tw.iehow.util.check.SlotCheck.isValid;
+
 
 public class HowItem implements ModInitializer {
 	@Override
@@ -21,6 +25,7 @@ public class HowItem implements ModInitializer {
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			EffectCheck.HERO_OF_THE_VILLAGE(player, entity);
+			if (isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:water_bucket", 1337001)){return ActionResult.FAIL;}
 			return ActionResult.PASS;
 		});
 	}

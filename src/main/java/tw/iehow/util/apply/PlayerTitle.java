@@ -1,4 +1,4 @@
-package tw.iehow.util;
+package tw.iehow.util.apply;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;

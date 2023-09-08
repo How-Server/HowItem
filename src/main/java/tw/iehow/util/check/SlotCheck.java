@@ -1,9 +1,11 @@
-package tw.iehow.util;
+package tw.iehow.util.check;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+
+import java.util.Objects;
 
 public class SlotCheck {
     public static boolean isValid(ItemStack stack, String itemId, int customModelData) {
@@ -15,7 +17,7 @@ public class SlotCheck {
                 return false;
             }
 
-            if (!stack.hasNbt() || !stack.getNbt().contains("CustomModelData")) {
+            if (!stack.hasNbt() || !Objects.requireNonNull(stack.getNbt()).contains("CustomModelData")) {
                 return false;
             }
 

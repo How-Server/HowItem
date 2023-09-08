@@ -1,4 +1,4 @@
-package tw.iehow.util;
+package tw.iehow.util.check;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

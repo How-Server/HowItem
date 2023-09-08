@@ -10,15 +10,15 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import tw.iehow.util.PotionEffect;
+import tw.iehow.util.apply.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.util.PlayerParticle.showParticle;
-import static tw.iehow.util.PlayerTitle.showTitle;
-import static tw.iehow.util.SlotCheck.isValid;
+import static tw.iehow.util.apply.PlayerParticle.showParticle;
+import static tw.iehow.util.apply.PlayerTitle.showTitle;
+import static tw.iehow.util.check.SlotCheck.isValid;
 
 public class AttackEffect{
 	//Log for CD
@@ -28,7 +28,7 @@ public class AttackEffect{
 		ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
 		//Timestamp for CD
 		UUID playerUuid = player.getUuid();
-		long lastUsedTime = cooldown.getOrDefault(player.getUuid(), 0L);
+		long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
 		long currentTime = world.getTime();
 		long interval = currentTime - lastUsedTime;
 

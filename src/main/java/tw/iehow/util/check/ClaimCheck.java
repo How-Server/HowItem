@@ -1,4 +1,4 @@
-package tw.iehow.util;
+package tw.iehow.util.check;
 
 import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.ClaimList;
