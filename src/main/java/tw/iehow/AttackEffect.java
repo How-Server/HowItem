@@ -51,8 +51,8 @@ public class AttackEffect{
 		}
 
 		//HowItem:KeyBoard
-		if (isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017)) {
-			if (interval >= 300 && !(entity instanceof EnderDragonPart)) {
+		if ((isValid(mainHand, "minecraft:netherite_sword", 1337014) || isValid(mainHand, "minecraft:netherite_sword", 1337016) || isValid(mainHand, "minecraft:netherite_sword", 1337017)) && !(entity instanceof EnderDragonPart)) {
+			if (interval >= 300) {
 				LivingEntity livingEntity = (LivingEntity) entity;
 				PotionEffect.add(livingEntity, StatusEffects.NAUSEA, 150, 1);
 				PotionEffect.add(livingEntity, StatusEffects.SLOWNESS, 100, 1);
@@ -63,8 +63,8 @@ public class AttackEffect{
 		}
 
 		//HowItem:how_wine
-		if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015)) {
-			if (interval >= 120 && !(entity instanceof EnderDragonPart)) {
+		if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337015) && !(entity instanceof EnderDragonPart)) {
+			if (interval >= 120) {
 				LivingEntity livingEntity = (LivingEntity) entity;
 				PotionEffect.add(livingEntity, StatusEffects.NAUSEA, 120, 1);
 				PotionEffect.add(livingEntity, StatusEffects.SLOW_FALLING, 120, 1);
