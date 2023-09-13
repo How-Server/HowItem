@@ -10,14 +10,14 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import tw.iehow.util.apply.PlayerParticle;
+import tw.iehow.util.apply.PlayerActionBar;
 import tw.iehow.util.apply.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.util.apply.PlayerParticle.showParticle;
-import static tw.iehow.util.apply.PlayerTitle.showTitle;
 import static tw.iehow.util.check.SlotCheck.isValid;
 
 public class AttackEffect{
@@ -36,10 +36,10 @@ public class AttackEffect{
 		if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
 			if (interval >= 120) {
 				PotionEffect.add(player, StatusEffects.REGENERATION, 60, 2);
-				showParticle(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
+				PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				showTitle(serverPlayer, 120 - interval);
+				PlayerActionBar.show(serverPlayer, 120 - interval);
 			}
 		}
 
@@ -58,7 +58,7 @@ public class AttackEffect{
 				PotionEffect.add(livingEntity, StatusEffects.SLOWNESS, 100, 1);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				showTitle(serverPlayer, 300 - interval);
+				PlayerActionBar.show(serverPlayer, 300 - interval);
 			}
 		}
 
@@ -69,10 +69,10 @@ public class AttackEffect{
 				PotionEffect.add(livingEntity, StatusEffects.NAUSEA, 120, 1);
 				PotionEffect.add(livingEntity, StatusEffects.SLOW_FALLING, 120, 1);
 				PotionEffect.add(livingEntity, StatusEffects.LEVITATION, 60, 1);
-				showParticle(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
+				PlayerParticle.show(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				showTitle(serverPlayer, 120 - interval);
+				PlayerActionBar.show(serverPlayer, 120 - interval);
 			}
 		}
 	}

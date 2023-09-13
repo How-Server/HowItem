@@ -4,11 +4,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -18,19 +15,19 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tw.iehow.util.apply.PlayerParticle;
+import tw.iehow.util.apply.PlayerSound;
+import tw.iehow.util.apply.PlayerActionBar;
 import tw.iehow.util.apply.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.util.apply.PlayerParticle.showParticle;
-import static tw.iehow.util.apply.PlayerTitle.showTitle;
 import static tw.iehow.util.check.SlotCheck.isValid;
 
 @Mixin(PlayerEntity.class)
 public abstract class HandHeldEffect {
-
     @Unique
     private boolean absorptionEffect = false;
 
@@ -75,7 +72,7 @@ public abstract class HandHeldEffect {
                 absorptionEffect = true;
             }else {
                 if (300 - interval >= 0){
-                    showTitle(serverPlayer, 300 - interval);
+                    PlayerActionBar.show(serverPlayer, 300 - interval);
                 }
             }
         }
@@ -96,10 +93,10 @@ public abstract class HandHeldEffect {
         if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)) {
             if (interval >= 200) {
                 PotionEffect.add(player, StatusEffects.REGENERATION, 80, 2);
-                showParticle(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
+                PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
                 cooldown.put(playerUuid, currentTime);
             }else {
-                showTitle(serverPlayer, 200 - interval);
+                PlayerActionBar.show(serverPlayer, 200 - interval);
             }
         }
 
@@ -107,7 +104,7 @@ public abstract class HandHeldEffect {
         if (isValid(offHand, "minecraft:water_bucket", 1337001)){
             if (player.getSteppingBlockState().getBlock() == Blocks.MAGMA_BLOCK){
                 PotionEffect.add(player, StatusEffects.FIRE_RESISTANCE,5,1);
-                showParticle(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
+                PlayerParticle.show(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
             }
             if (player.fallDistance >= 3.0F){
                 BlockPos surfacePos = player.getWorld().getTopPosition(Heightmap.Type.WORLD_SURFACE, player.getBlockPos());
@@ -115,8 +112,8 @@ public abstract class HandHeldEffect {
 
                 if (distanceToSurface <= 3.0) {
                     PotionEffect.add(player, StatusEffects.SLOW_FALLING, 5, 1);
-                    showParticle(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
-                    serverPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(SoundEvents.ITEM_BUCKET_FILL), SoundCategory.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 2.0F - (player.fallDistance / 16.0F) * 0.2F, player.getRandom().nextLong()));
+                    PlayerParticle.show(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
+                    PlayerSound.play(serverPlayer, SoundEvents.ITEM_BUCKET_FILL, 1.0F, 2.0F - (player.fallDistance / 16.0F) * 0.2F);
                 }
             }
         }
