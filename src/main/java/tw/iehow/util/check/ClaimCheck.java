@@ -18,6 +18,6 @@ public class ClaimCheck {
         if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
             return true;
         }
-        return (entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PVP);
+        return (entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(null, PermissionManager.PVP);
     }
 }
