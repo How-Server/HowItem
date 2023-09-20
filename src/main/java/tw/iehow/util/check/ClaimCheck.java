@@ -8,16 +8,30 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 
 import java.util.Optional;
 
 public class ClaimCheck {
-    public static boolean permission(PlayerEntity player, Entity entity){
+    public static boolean attackEntity(PlayerEntity player, Entity entity){
         Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
 
         if (!(entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.DAMAGE_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()))) {
             return true;
         }
         return (entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().hasPermission(null, PermissionManager.PVP);
+    }
+    public static boolean useEntity(PlayerEntity player, Entity entity){
+        Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
+        return claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.INTERACT_ENTITY, Node.dummy(Registries.ENTITY_TYPE, entity.getType()));
+    }
+    public static boolean useItem(PlayerEntity player, Hand hand){
+        Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
+        return claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.USE_ITEM, Node.dummy(Registries.ITEM, player.getStackInHand(hand).getItem()));
+    }
+    public static boolean useBlock(PlayerEntity player, World world){
+        Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
+        return claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.USE_ON_BLOCK, Node.dummy(Registries.BLOCK, world.getBlockState(player.getBlockPos()).getBlock()));
     }
 }
