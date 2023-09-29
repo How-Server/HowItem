@@ -42,11 +42,11 @@ public class HowItem implements ModInitializer {
 //			return TypedActionResult.success(ItemStack.EMPTY);
 //		});
 
-		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-			if (ClaimCheck.useBlock(player, world)){return ActionResult.FAIL;}
-			if (!DimensionCheck.isSurvival(player) && !player.hasPermissionLevel(4)){return ActionResult.FAIL;}
-
-			return ActionResult.PASS;
-		});
+//		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+//			if (ClaimCheck.useBlock(player, world)){return ActionResult.FAIL;}
+//			if (!DimensionCheck.isSurvival(player) && !player.hasPermissionLevel(4)){return ActionResult.FAIL;}
+//
+//			return ActionResult.PASS;
+//		});
 	}
 }

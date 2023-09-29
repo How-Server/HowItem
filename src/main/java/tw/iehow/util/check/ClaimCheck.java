@@ -32,6 +32,6 @@ public class ClaimCheck {
     }
     public static boolean useBlock(PlayerEntity player, World world){
         Optional<AbstractClaim> claim = ClaimList.INSTANCE.getClaimAt((ServerWorld) player.getWorld(), player.getSteppingPos());
-        return claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.USE_ON_BLOCK, Node.dummy(Registries.BLOCK, world.getBlockState(player.getBlockPos()).getBlock()));
+        return claim.isPresent() && !claim.get().hasPermission(player.getUuid(), PermissionManager.PLACE, Node.dummy(Registries.BLOCK, world.getBlockState(player.getBlockPos()).getBlock()));
     }
 }
