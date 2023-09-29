@@ -101,7 +101,7 @@ public abstract class HandHeldEffect {
         }
 
         //HowItem:how_water_bucket
-        if (isValid(offHand, "minecraft:water_bucket", 1337001)){
+        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337016)){
             if (player.getSteppingBlockState().getBlock() == Blocks.MAGMA_BLOCK){
                 PotionEffect.add(player, StatusEffects.FIRE_RESISTANCE,5,1);
                 PlayerParticle.show(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
