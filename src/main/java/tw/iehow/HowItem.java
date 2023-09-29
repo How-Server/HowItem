@@ -33,18 +33,18 @@ public class HowItem implements ModInitializer {
 			return ActionResult.PASS;
 		});
 
-		UseItemCallback.EVENT.register((player, world, hand) -> {
-			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
-			if (Objects.requireNonNull(player.getStackInHand(hand).getNbt()).contains("nouse")){
-				return TypedActionResult.fail(ItemStack.EMPTY);
-			}
-
-			return TypedActionResult.success(ItemStack.EMPTY);
-		});
+//		UseItemCallback.EVENT.register((player, world, hand) -> {
+//			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
+//			if (Objects.requireNonNull(player.getStackInHand(hand).getNbt()).contains("nouse")){
+//				return TypedActionResult.fail(ItemStack.EMPTY);
+//			}
+//
+//			return TypedActionResult.success(ItemStack.EMPTY);
+//		});
 
 		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 			if (ClaimCheck.useBlock(player, world)){return ActionResult.FAIL;}
-			if (!DimensionCheck.isSurvival(player)){return ActionResult.FAIL;}
+			if (!DimensionCheck.isSurvival(player) && !player.hasPermissionLevel(4)){return ActionResult.FAIL;}
 
 			return ActionResult.PASS;
 		});
