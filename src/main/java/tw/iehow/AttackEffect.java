@@ -8,10 +8,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import tw.iehow.util.apply.PlayerParticle;
 import tw.iehow.util.apply.PlayerActionBar;
+import tw.iehow.util.apply.PlayerSound;
 import tw.iehow.util.apply.PotionEffect;
 
 import java.util.HashMap;
@@ -39,7 +42,7 @@ public class AttackEffect{
 				PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				PlayerActionBar.show(serverPlayer, 120 - interval);
+				PlayerActionBar.showCD(serverPlayer, 120 - interval);
 			}
 		}
 
@@ -58,7 +61,7 @@ public class AttackEffect{
 				PotionEffect.add(livingEntity, StatusEffects.SLOWNESS, 100, 1);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				PlayerActionBar.show(serverPlayer, 300 - interval);
+				PlayerActionBar.showCD(serverPlayer, 300 - interval);
 			}
 		}
 
@@ -72,7 +75,7 @@ public class AttackEffect{
 				PlayerParticle.show(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				PlayerActionBar.show(serverPlayer, 120 - interval);
+				PlayerActionBar.showCD(serverPlayer, 120 - interval);
 			}
 		}
 		//HowItem:how_drum
@@ -84,7 +87,7 @@ public class AttackEffect{
 				PlayerParticle.show(serverPlayer, ParticleTypes.SONIC_BOOM, player.getX(), player.getY() + 0.2, player.getZ(), 1.6F, 0.8F, 1.6F, 0.1F, 10);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				PlayerActionBar.show(serverPlayer, 60 - interval);
+				PlayerActionBar.showCD(serverPlayer, 60 - interval);
 			}
 		}
 	}

@@ -72,7 +72,7 @@ public abstract class HandHeldEffect {
                 absorptionEffect = true;
             }else {
                 if (300 - interval >= 0){
-                    PlayerActionBar.show(serverPlayer, 300 - interval);
+                    PlayerActionBar.showCD(serverPlayer, 300 - interval);
                 }
             }
         }
@@ -96,7 +96,7 @@ public abstract class HandHeldEffect {
                 PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
                 cooldown.put(playerUuid, currentTime);
             }else {
-                PlayerActionBar.show(serverPlayer, 200 - interval);
+                PlayerActionBar.showCD(serverPlayer, 200 - interval);
             }
         }
 
