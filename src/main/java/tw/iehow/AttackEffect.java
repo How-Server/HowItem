@@ -80,14 +80,15 @@ public class AttackEffect{
 		}
 		//HowItem:how_drum
 		if (isValid(mainHand, "minecraft:skull_banner_pattern", 1337017) && !(entity instanceof EnderDragonPart)) {
-			if (interval >= 60) {
+			PlayerSound.play(serverPlayer, SoundEvents.ENTITY_WARDEN_HEARTBEAT, 1.0F, 1.0F);
+			if (interval >= 120) {
 				if (entity.isPlayer()) PlayerActionBar.showText((ServerPlayerEntity) entity, "哈哈！單身狗是你", Formatting.AQUA);
 				world.createExplosion(null, null, null, entity.getX(), entity.getY(), entity.getZ(), 1.0F, false, World.ExplosionSourceType.NONE);
 				PlayerSound.play(serverPlayer, SoundEvents.ENTITY_WARDEN_SONIC_BOOM, 1.0F, 1.0F);
 				PlayerParticle.show(serverPlayer, ParticleTypes.SONIC_BOOM, player.getX(), player.getY() + 0.2, player.getZ(), 1.6F, 0.8F, 1.6F, 0.1F, 10);
 				cooldown.put(playerUuid, currentTime);
 			} else {
-				PlayerActionBar.showCD(serverPlayer, 60 - interval);
+				PlayerActionBar.showCD(serverPlayer, 120 - interval);
 			}
 		}
 	}
