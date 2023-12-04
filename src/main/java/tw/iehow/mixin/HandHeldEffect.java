@@ -1,6 +1,7 @@
 package tw.iehow.mixin;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -41,7 +42,7 @@ public abstract class HandHeldEffect {
         PlayerEntity player = ((PlayerEntity)(Object)this);
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
         ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
-
+        ItemStack head = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD);
         //Timestamp for CD
         UUID playerUuid = player.getUuid();
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
@@ -116,6 +117,11 @@ public abstract class HandHeldEffect {
                     PlayerSound.play(serverPlayer, SoundEvents.ITEM_BUCKET_FILL, 1.0F, 2.0F - (player.fallDistance / 16.0F) * 0.2F);
                 }
             }
+        }
+        //HowItem:how_hat
+        if (isValid(head, "minecraft:flower_banner_pattern", 1337030)){
+            PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 2.0, player.getZ(), 1.2F, 1.0F, 1.2F, 0.01f, 2);
+            PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 2.0, player.getZ(), 0.3F, 1.0F, 0.3F, 0.01f, 2);
         }
     }
 }
