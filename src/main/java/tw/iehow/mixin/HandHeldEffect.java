@@ -120,8 +120,8 @@ public abstract class HandHeldEffect {
         }
         //HowItem:how_hat
         if (isValid(head, "minecraft:flower_banner_pattern", 1337030)){
-            PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 2.0, player.getZ(), 1.2F, 1.0F, 1.2F, 0.01f, 2);
-            PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 2.0, player.getZ(), 0.3F, 1.0F, 0.3F, 0.01f, 2);
+            PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 2.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
+            PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.5, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 2);
         }
     }
 }
