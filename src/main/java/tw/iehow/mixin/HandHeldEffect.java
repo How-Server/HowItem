@@ -123,5 +123,23 @@ public abstract class HandHeldEffect {
             PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 3.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
             PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.2, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 1);
         }
+
+        //HowItem:dragon_head
+        if (isValid(head, "minecraft:flower_banner_pattern", 1337037)){
+            for (ServerPlayerEntity player1 : serverPlayer.server.getPlayerManager().getPlayerList()){
+                if (player1.distanceTo(player) < 24.0){
+                    PotionEffect.add(player1, StatusEffects.LUCK, 10, 0);
+                    PotionEffect.add(player1, StatusEffects.REGENERATION, 10, 0);
+                }
+            }
+            if (player.getSteppingBlockState().getBlock().equals(Blocks.LAVA)){
+                PotionEffect.add(player, StatusEffects.FIRE_RESISTANCE, 10, 1);
+                PotionEffect.add(player, StatusEffects.STRENGTH, 10, 2);
+                PlayerParticle.show(serverPlayer, ParticleTypes.FLAME, player.getX(), player.getY() + 2.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
+            }
+            if(player.getSteppingBlockState().getBlock().equals(Blocks.WATER)){
+                PotionEffect.add(player, StatusEffects.POISON,10, 4);
+            }
+        }
     }
 }
