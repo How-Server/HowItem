@@ -142,7 +142,7 @@ public abstract class HandHeldEffect {
                 PotionEffect.add(player, StatusEffects.POISON,10, 4);
             }
         }
-        if (isValid(head, "minecraft:skull_banner_pattern", 1337038)){
+        if (isValid(head, "minecraft:skull_banner_pattern", 1337020)){
             if (player.isSneaking()){
                 PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
                 PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
