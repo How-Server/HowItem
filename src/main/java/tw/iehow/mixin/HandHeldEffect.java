@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
@@ -16,9 +17,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tw.iehow.util.apply.PlayerActionBar;
 import tw.iehow.util.apply.PlayerParticle;
 import tw.iehow.util.apply.PlayerSound;
-import tw.iehow.util.apply.PlayerActionBar;
 import tw.iehow.util.apply.PotionEffect;
 
 import java.util.HashMap;
@@ -139,6 +140,15 @@ public abstract class HandHeldEffect {
             }
             if(player.getSteppingBlockState().getBlock().equals(Blocks.WATER)){
                 PotionEffect.add(player, StatusEffects.POISON,10, 4);
+            }
+        }
+        if (isValid(head, "minecraft:skull_banner_pattern", 1337038)){
+            if (player.isSneaking()){
+                PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
+                PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
+            }
+            if (player.getSteppingBlockState().getBlock().equals(Blocks.AIR) && player.hasStatusEffect(StatusEffects.JUMP_BOOST) && !player.getAbilities().flying){
+                PlayerParticle.show(serverPlayer, ParticleTypes.GUST, player.getX(), player.getY() + 0.8 ,player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 1);
             }
         }
     }
