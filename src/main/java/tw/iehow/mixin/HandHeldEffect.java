@@ -147,7 +147,8 @@ public abstract class HandHeldEffect {
                 PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
                 PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
             }
-            if (player.getSteppingBlockState().getBlock().equals(Blocks.AIR) && player.hasStatusEffect(StatusEffects.JUMP_BOOST) && !player.getAbilities().flying){
+            if ((player.getSteppingBlockState().getBlock().equals(Blocks.AIR) || player.getSteppingBlockState().getBlock().equals(Blocks.LIGHT))
+            && player.hasStatusEffect(StatusEffects.JUMP_BOOST) && !player.getAbilities().flying){
                 PlayerParticle.show(serverPlayer, ParticleTypes.GUST, player.getX(), player.getY() + 0.8 ,player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 1);
             }
         }
