@@ -21,6 +21,7 @@ import tw.iehow.util.apply.PlayerActionBar;
 import tw.iehow.util.apply.PlayerParticle;
 import tw.iehow.util.apply.PlayerSound;
 import tw.iehow.util.apply.PotionEffect;
+import tw.iehow.util.check.DimensionCheck;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +44,7 @@ public abstract class HandHeldEffect {
         PlayerEntity player = ((PlayerEntity)(Object)this);
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
         ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
+        ItemStack hand = ((PlayerEntity)(Object)this).getStackInHand(Hand.MAIN_HAND);
         ItemStack head = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD);
         //Timestamp for CD
         UUID playerUuid = player.getUuid();
@@ -142,14 +144,24 @@ public abstract class HandHeldEffect {
                 PotionEffect.add(player, StatusEffects.POISON,10, 4);
             }
         }
+        //HowItem:student_hat
         if (isValid(head, "minecraft:skull_banner_pattern", 1337020)){
-            if (player.isSneaking()){
+            if (player.isSneaking() && !player.isFallFlying()){
                 PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
                 PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
             }
             if ((player.getSteppingBlockState().getBlock().equals(Blocks.AIR) || player.getSteppingBlockState().getBlock().equals(Blocks.LIGHT))
             && player.hasStatusEffect(StatusEffects.JUMP_BOOST) && !player.getAbilities().flying){
                 PlayerParticle.show(serverPlayer, ParticleTypes.GUST, player.getX(), player.getY() + 0.8 ,player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 1);
+            }
+        }
+        //HowItem:clown
+        if (isValid(head, "minecraft:skull_banner_pattern", 1337021) && DimensionCheck.isSurvival(player)){
+            if (isValid(offHand, "minecraft:flower_banner_pattern", 1337016)){
+                PotionEffect.add(player, StatusEffects.LEVITATION,10,0);
+            }
+            if (isValid(hand, "minecraft:flower_banner_pattern", 1337016)){
+                PotionEffect.add(player, StatusEffects.SLOW_FALLING,10,0);
             }
         }
     }
