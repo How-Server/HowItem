@@ -1,5 +1,7 @@
 package tw.iehow;
 
+import com.gmail.sneakdevs.diamondeconomy.DiamondUtils;
+import com.gmail.sneakdevs.diamondeconomy.sql.DatabaseManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -30,12 +32,16 @@ public class AttackEffect{
 	public static void mainHand(PlayerEntity player, World world, Entity entity){
 		ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 		ItemStack mainHand = player.getStackInHand(Hand.MAIN_HAND);
+		ItemStack offHand = player.getStackInHand(Hand.OFF_HAND);
 		ItemStack head = player.getEquippedStack(EquipmentSlot.HEAD);
 		//Timestamp for CD
 		UUID playerUuid = player.getUuid();
 		long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
 		long currentTime = world.getTime();
 		long interval = currentTime - lastUsedTime;
+
+		//HowBank
+		DatabaseManager dm = DiamondUtils.getDatabaseManager();
 
 		//HowItem:Sakura_Katana
 		if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
@@ -99,6 +105,21 @@ public class AttackEffect{
 				PlayerSound.play((ServerPlayerEntity) entity, SoundEvents.ENTITY_WITCH_CELEBRATE, 1.0F ,1.0F);
 				PlayerActionBar.showText((ServerPlayerEntity) entity, "小丑竟是我？", Formatting.RED);
 				PlayerSound.play((ServerPlayerEntity) player, SoundEvents.ENTITY_WITCH_CELEBRATE, 1.0F ,1.0F);
+			}
+			//HowItem:how_card
+			if (isValid(offHand, "minecraft:skull_banner_pattern", 1337022) && entity instanceof PlayerEntity) {
+				int money = dm.getBalanceFromUUID(player.getUuid().toString());
+				if (money > 0) {
+					dm.changeBalance(player.getUuid().toString(), -1);
+					PlayerActionBar.showText((ServerPlayerEntity) player, "您賞了 " + entity.getDisplayName().getString() + " 1 塊", Formatting.YELLOW);
+					PotionEffect.add(player, StatusEffects.GLOWING, 200, 1);
+					dm.changeBalance(entity.getUuid().toString(), 1);
+					PlayerActionBar.showText((ServerPlayerEntity) entity, player.getDisplayName().getString() + " 有錢人賞了你 1 塊", Formatting.GREEN);
+					PlayerSound.play((ServerPlayerEntity) player, SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
+				}else {
+					PlayerActionBar.showText(player, "菜就多練，沒錢就別搞", Formatting.RED);
+					PlayerSound.play((ServerPlayerEntity) player, SoundEvents.ENTITY_VILLAGER_NO, 1.0F, 1.0F);
+				}
 			}
 		}
 
