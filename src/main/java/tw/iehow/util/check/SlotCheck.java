@@ -1,5 +1,6 @@
 package tw.iehow.util.check;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -17,11 +18,11 @@ public class SlotCheck {
                 return false;
             }
 
-            if (!stack.hasNbt() || !Objects.requireNonNull(stack.getNbt()).contains("CustomModelData")) {
+            if (!stack.getComponents().contains(DataComponentTypes.CUSTOM_MODEL_DATA)) {
                 return false;
             }
 
-            int actualCustomModelData = stack.getNbt().getInt("CustomModelData");
+            int actualCustomModelData = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA).value();
             return actualCustomModelData == customModelData;
         }
         return false;
