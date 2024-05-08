@@ -1,18 +1,13 @@
 package tw.iehow;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.TypedActionResult;
 import tw.iehow.util.check.ClaimCheck;
-import tw.iehow.util.check.DimensionCheck;
 import tw.iehow.util.check.EntityCheck;
-
-import java.util.Objects;
+import tw.iehow.util.placeholder.register;
 
 
 public class HowItem implements ModInitializer {
@@ -32,6 +27,7 @@ public class HowItem implements ModInitializer {
 			UseEffect.mainHand(player, entity);
 			return ActionResult.PASS;
 		});
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> new register().levelPlaceHolder());
 
 //		UseItemCallback.EVENT.register((player, world, hand) -> {
 //			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
