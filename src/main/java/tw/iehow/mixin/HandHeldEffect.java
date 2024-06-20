@@ -164,5 +164,19 @@ public abstract class HandHeldEffect {
                 PotionEffect.add(player, StatusEffects.SLOW_FALLING,10,0);
             }
         }
+        //HowItem:pillow
+        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337023)){
+            if (player.getHungerManager().isNotFull()){
+                if (interval > 30){
+                    PotionEffect.add(player, StatusEffects.SATURATION,1,0);
+                    cooldown.put(playerUuid, currentTime);
+                }
+                PotionEffect.add(player, StatusEffects.DARKNESS,60,2);
+                PotionEffect.add(player, StatusEffects.SLOWNESS,30,9);
+                PlayerActionBar.showText(serverPlayer, "小睡一下．．．", Formatting.AQUA);
+            }else {
+                PlayerActionBar.showText(serverPlayer, "睡飽就別睡ㄌ！去做事", Formatting.RED);
+            }
+        }
     }
 }
