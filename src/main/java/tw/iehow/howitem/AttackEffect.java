@@ -1,4 +1,4 @@
-package tw.iehow;
+package tw.iehow.howitem;
 
 import com.gmail.sneakdevs.diamondeconomy.DiamondUtils;
 import com.gmail.sneakdevs.diamondeconomy.sql.DatabaseManager;
@@ -15,16 +15,16 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import tw.iehow.util.apply.PlayerActionBar;
-import tw.iehow.util.apply.PlayerParticle;
-import tw.iehow.util.apply.PlayerSound;
-import tw.iehow.util.apply.PotionEffect;
+import tw.iehow.howitem.util.apply.PlayerActionBar;
+import tw.iehow.howitem.util.apply.PlayerParticle;
+import tw.iehow.howitem.util.apply.PlayerSound;
+import tw.iehow.howitem.util.apply.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.util.check.SlotCheck.isValid;
+import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 public class AttackEffect{
 	//Log for CD

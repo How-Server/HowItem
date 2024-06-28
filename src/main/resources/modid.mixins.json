@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "tw.iehow.mixin",
+	"package": "tw.iehow.howitem.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"HandHeldEffect"

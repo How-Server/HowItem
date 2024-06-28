@@ -1,4 +1,4 @@
-package tw.iehow.mixin;
+package tw.iehow.howitem.mixin;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,17 +17,17 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tw.iehow.util.apply.PlayerActionBar;
-import tw.iehow.util.apply.PlayerParticle;
-import tw.iehow.util.apply.PlayerSound;
-import tw.iehow.util.apply.PotionEffect;
-import tw.iehow.util.check.DimensionCheck;
+import tw.iehow.howitem.util.apply.PlayerActionBar;
+import tw.iehow.howitem.util.apply.PlayerParticle;
+import tw.iehow.howitem.util.apply.PlayerSound;
+import tw.iehow.howitem.util.apply.PotionEffect;
+import tw.iehow.howitem.util.check.DimensionCheck;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static tw.iehow.util.check.SlotCheck.isValid;
+import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(PlayerEntity.class)
 public abstract class HandHeldEffect {

@@ -1,4 +1,4 @@
-package tw.iehow.util.apply;
+package tw.iehow.howitem.util.apply;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;

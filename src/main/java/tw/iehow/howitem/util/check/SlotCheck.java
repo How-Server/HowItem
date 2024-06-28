@@ -1,12 +1,10 @@
-package tw.iehow.util.check;
+package tw.iehow.howitem.util.check;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-
-import java.util.Objects;
 
 public class SlotCheck {
     public static boolean isValid(ItemStack stack, String itemId, int customModelData) {

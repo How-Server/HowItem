@@ -1,8 +1,8 @@
-package tw.iehow;
+package tw.iehow.howitem;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import tw.iehow.util.check.EffectCheck;
+import tw.iehow.howitem.util.check.EffectCheck;
 
 public class UseEffect {
     public static void mainHand(PlayerEntity player, Entity entity){

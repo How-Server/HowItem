@@ -1,4 +1,4 @@
-package tw.iehow.util.placeholder;
+package tw.iehow.howitem.util.placeholder;
 
 import eu.pb4.placeholders.api.PlaceholderResult;
 import eu.pb4.placeholders.api.Placeholders;

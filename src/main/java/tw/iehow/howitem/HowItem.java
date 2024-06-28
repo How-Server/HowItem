@@ -1,13 +1,13 @@
-package tw.iehow;
+package tw.iehow.howitem;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.util.ActionResult;
-import tw.iehow.util.check.ClaimCheck;
-import tw.iehow.util.check.EntityCheck;
-import tw.iehow.util.placeholder.register;
+import tw.iehow.howitem.util.check.ClaimCheck;
+import tw.iehow.howitem.util.check.EntityCheck;
+import tw.iehow.howitem.util.placeholder.register;
 
 
 public class HowItem implements ModInitializer {
