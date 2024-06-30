@@ -4,7 +4,10 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.TypedActionResult;
 import tw.iehow.howitem.util.check.ClaimCheck;
 import tw.iehow.howitem.util.check.EntityCheck;
 import tw.iehow.howitem.util.placeholder.register;
@@ -29,14 +32,11 @@ public class HowItem implements ModInitializer {
 		});
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> new register().levelPlaceHolder());
 
-//		UseItemCallback.EVENT.register((player, world, hand) -> {
-//			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
-//			if (Objects.requireNonNull(player.getStackInHand(hand).getNbt()).contains("nouse")){
-//				return TypedActionResult.fail(ItemStack.EMPTY);
-//			}
-//
-//			return TypedActionResult.success(ItemStack.EMPTY);
-//		});
+		UseItemCallback.EVENT.register((player, world, hand) -> {
+			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
+			UseItem.mainHand(player, hand);
+			return TypedActionResult.success(ItemStack.EMPTY);
+		});
 
 //		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 //			if (ClaimCheck.useBlock(player, world)){return ActionResult.FAIL;}

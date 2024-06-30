@@ -25,4 +25,20 @@ public class SlotCheck {
         }
         return false;
     }
+    public static boolean isValid(ItemStack stack, Item item, int customModelData) {
+        if (!stack.isEmpty()) {
+
+            if (stack.getItem() != item) {
+                return false;
+            }
+
+            if (!stack.getComponents().contains(DataComponentTypes.CUSTOM_MODEL_DATA)) {
+                return false;
+            }
+
+            int actualCustomModelData = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA).value();
+            return actualCustomModelData == customModelData;
+        }
+        return false;
+    }
 }
