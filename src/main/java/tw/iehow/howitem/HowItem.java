@@ -33,9 +33,10 @@ public class HowItem implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> new register().levelPlaceHolder());
 
 		UseItemCallback.EVENT.register((player, world, hand) -> {
-			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(ItemStack.EMPTY);}
+			ItemStack stack = player.getStackInHand(hand);
+			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(stack);}
 			UseItem.mainHand(player, hand);
-			return TypedActionResult.success(ItemStack.EMPTY);
+			return TypedActionResult.pass(stack);
 		});
 
 //		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
