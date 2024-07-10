@@ -47,6 +47,7 @@ public class AttackEffect{
 		if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
 			if (interval >= 120) {
 				PotionEffect.add(player, StatusEffects.REGENERATION, 60, 2);
+				PotionEffect.add((LivingEntity) entity, StatusEffects.SLOWNESS, 20, 2);
 				PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
 				cooldown.put(playerUuid, currentTime);
 			} else {
