@@ -2,6 +2,7 @@ package tw.iehow.howitem;
 
 import com.gmail.sneakdevs.diamondeconomy.DiamondUtils;
 import com.gmail.sneakdevs.diamondeconomy.sql.DatabaseManager;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -42,20 +43,34 @@ public class AttackEffect{
 
 		//HowBank
 		DatabaseManager dm = DiamondUtils.getDatabaseManager();
-
-		//HowItem:Sakura_Katana
-		if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
-			if (interval >= 120) {
-				PotionEffect.add(player, StatusEffects.REGENERATION, 60, 2);
-				PotionEffect.add((LivingEntity) entity, StatusEffects.SLOWNESS, 20, 2);
-				PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
-				cooldown.put(playerUuid, currentTime);
-			} else {
-				PlayerActionBar.showCD(serverPlayer, 120 - interval);
-			}
-		}
 		//EnderDragon Pass
 		if (!(entity instanceof EnderDragonPart)){
+			//HowItem:Sakura_Katana
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337003)) {
+				if (interval >= 120) {
+					PotionEffect.add(player, StatusEffects.REGENERATION, 60, 2);
+					PotionEffect.add((LivingEntity) entity, StatusEffects.SLOWNESS, 20, 2);
+					PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
+					cooldown.put(playerUuid, currentTime);
+				} else {
+					PlayerActionBar.showCD(serverPlayer, 120 - interval);
+				}
+			}
+			//HowItem:Blue_Katana
+			if (isValid(mainHand, "minecraft:netherite_sword", 1337008)) {
+				if (!player.getSteppingBlockState().getBlock().equals(Blocks.WATER)) return;
+				if (interval >= 120) {
+					PotionEffect.add(player, StatusEffects.ABSORPTION, 120, 1);
+					PotionEffect.add(player, StatusEffects.DOLPHINS_GRACE, 120, 2);
+					PotionEffect.add((LivingEntity) entity, StatusEffects.SLOWNESS, 20, 2);
+					player.setAir(player.getMaxAir());
+					PlayerParticle.show(serverPlayer, ParticleTypes.BUBBLE, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1F, 120);
+					PlayerSound.onlyPlay(serverPlayer, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, 1.0F, 1.0F);
+					cooldown.put(playerUuid, currentTime);
+				} else {
+					PlayerActionBar.showCD(serverPlayer, 120 - interval);
+				}
+			}
 			//HowItem:Black_Katana
 			if (isValid(mainHand, "minecraft:netherite_sword", 1337004)) {
 				LivingEntity livingEntity = (LivingEntity) entity;
