@@ -33,4 +33,8 @@ public class ClaimCheck {
         Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
         return claim.isPresent() && !claim.get().checkAction(player.getUuid(), FlagsManager.PLACE, Node.registry(Registries.BLOCK, world.getBlockState(player.getBlockPos()).getBlock()));
     }
+    public static boolean canPvP(PlayerEntity player, World world){
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
+        return claim.isPresent() && !claim.get().checkAction(null, FlagsManager.PVP);
+    }
 }

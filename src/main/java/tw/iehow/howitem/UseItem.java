@@ -1,5 +1,6 @@
 package tw.iehow.howitem;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
@@ -12,12 +13,14 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypeFilter;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
+import tw.iehow.howitem.util.check.ClaimCheck;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -129,6 +132,8 @@ public class UseItem {
             double x = player.getX() + direction.x * i;
             double y = player.getY() + player.getEyeHeight(player.getPose()) + direction.y * i;
             double z = player.getZ() + direction.z * i;
+            BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
+            if (!player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.AIR) || !player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.LIGHT)) return;
             if (gold && i > 2 && i % 2 == 0)
                 PlayerParticle.show(player, ParticleTypes.GLOW_SQUID_INK, x, y, z, 0.6f, 0.1f, 0.6f, 0.1f, particleCount);
             else if (!gold && i > 2 && i % 2 == 0)
@@ -139,8 +144,7 @@ public class UseItem {
                     entity -> entity != player
             ).forEach(entity -> {
                 if (entity.isPlayer()) { PlayerEntity player1 = (PlayerEntity) entity;
-                    if (player1.isCreative() || player1.isSpectator()) { return;
-                    }
+                    if (player1.isCreative() || player1.isSpectator() || ClaimCheck.canPvP(player, player.getWorld())) return;
                 }
                 entity.damage(player.getDamageSources().magic(), damage);
                 PlayerSound.onlyPlay(player, SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 0.5f, 0.94f);
