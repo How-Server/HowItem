@@ -133,7 +133,7 @@ public class UseItem {
             double y = player.getY() + player.getEyeHeight(player.getPose()) + direction.y * i;
             double z = player.getZ() + direction.z * i;
             BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
-            if (!player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.AIR) || !player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.LIGHT)) return;
+            if (!player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.AIR) && !player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.LIGHT)) return;
             if (gold && i > 2 && i % 2 == 0)
                 PlayerParticle.show(player, ParticleTypes.GLOW_SQUID_INK, x, y, z, 0.6f, 0.1f, 0.6f, 0.1f, particleCount);
             else if (!gold && i > 2 && i % 2 == 0)
