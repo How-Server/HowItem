@@ -5,6 +5,7 @@
   "mixins": [
     "EatFood",
     "HandHeldEffect",
+    "PlayerDeath",
     "VillagerTrade"
   ],
   "injectors": {
