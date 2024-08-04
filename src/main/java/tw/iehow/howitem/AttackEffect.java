@@ -74,6 +74,8 @@ public class AttackEffect{
 			//HowItem:Black_Katana
 			if (isValid(mainHand, "minecraft:netherite_sword", 1337004)) {
 				LivingEntity livingEntity = (LivingEntity) entity;
+				PlayerEntity playerEntity = (PlayerEntity) entity;
+				if (playerEntity.hasPermissionLevel(4)) return;
 				PotionEffect.add(livingEntity,StatusEffects.WITHER, 100, 1);
 				PotionEffect.add(livingEntity,StatusEffects.DARKNESS, 300, 1);
 			}
