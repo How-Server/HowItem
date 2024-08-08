@@ -3,9 +3,7 @@ package tw.iehow.howitem;
 import com.gmail.sneakdevs.diamondeconomy.DiamondUtils;
 import com.gmail.sneakdevs.diamondeconomy.sql.DatabaseManager;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -74,8 +72,9 @@ public class AttackEffect{
 			//HowItem:Black_Katana
 			if (isValid(mainHand, "minecraft:netherite_sword", 1337004)) {
 				LivingEntity livingEntity = (LivingEntity) entity;
-				PlayerEntity playerEntity = (PlayerEntity) entity;
-				if (playerEntity.hasPermissionLevel(4)) return;
+				if (entity instanceof PlayerEntity) {
+					if (entity.hasPermissionLevel(4)) return;
+				}
 				PotionEffect.add(livingEntity,StatusEffects.WITHER, 100, 1);
 				PotionEffect.add(livingEntity,StatusEffects.DARKNESS, 300, 1);
 			}
