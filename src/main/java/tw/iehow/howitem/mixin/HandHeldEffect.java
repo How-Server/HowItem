@@ -2,6 +2,7 @@ package tw.iehow.howitem.mixin;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,10 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,6 +30,7 @@ import tw.iehow.howitem.util.check.DimensionCheck;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
@@ -95,9 +100,10 @@ public abstract class HandHeldEffect {
         }
 
         //HowItem:chinese_valentines_2023/red_rose
-        if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)) {
+        if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)
+         || isValid(offHand, "minecraft:skull_banner_pattern", 1337029)) {
             if (interval >= 200) {
-                PotionEffect.add(player, StatusEffects.REGENERATION, 80, 2);
+                PotionEffect.add(player, StatusEffects.REGENERATION, 80, 1);
                 PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
                 cooldown.put(playerUuid, currentTime);
             }else {
@@ -177,6 +183,63 @@ public abstract class HandHeldEffect {
                 PlayerActionBar.showText(serverPlayer, "小睡一下．．．", Formatting.AQUA);
             }else {
                 PlayerActionBar.showText(serverPlayer, "睡飽就別睡ㄌ！去做事", Formatting.RED);
+            }
+        }
+        //HowItem:heart_glasses
+        if (isValid(head, "minecraft:skull_banner_pattern", 1337026)){
+            heartShoot(player);
+        }
+        //HowItem:chocolate_box
+        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337029)){
+            PlayerParticle.show(serverPlayer, ParticleTypes.CHERRY_LEAVES, player.getX(), player.getY() + 2.0, player.getZ(), 1.5F, 0.5F, 1.5F, 1, 2);
+        }
+    }
+
+    @Unique
+    private static void heartShoot(PlayerEntity player) {
+        AtomicInteger distance = new AtomicInteger(0);
+        Vec3d direction = player.getRotationVector();
+        for (int i = 0; i < 16; i++) {
+            double x = player.getX() + direction.x * i;
+            double y = player.getY() + player.getEyeHeight(player.getPose()) + direction.y * i;
+            double z = player.getZ() + direction.z * i;
+            BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
+            if (!player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.AIR) && !player.getWorld().getBlockState(blockPos).getBlock().equals(Blocks.LIGHT)) return;
+
+            int finalI = i;
+            player.getWorld().getEntitiesByType(
+                    TypeFilter.instanceOf(LivingEntity.class),
+                    new Box(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1),
+                    entity -> entity != player
+            ).forEach(entity -> {
+                if (entity.isPlayer()) { PlayerEntity targetPlayer = (PlayerEntity) entity;
+                    if (targetPlayer.isCreative() || targetPlayer.isSpectator()) return;
+                    if (!targetPlayer.hasStatusEffect(StatusEffects.REGENERATION)){
+                        distance.set(finalI);
+                    }
+                }
+            });
+            if (distance.get() > 0) break;
+        }
+        if (distance.get() > 0){
+            for (int i = 0; i < distance.get() + 1; i++) {
+                double x = player.getX() + direction.x * i;
+                double y = player.getY() + player.getEyeHeight(player.getPose()) + direction.y * i;
+                double z = player.getZ() + direction.z * i;
+                if (i % 2 == 0 && i > 0) PlayerParticle.show(player, ParticleTypes.HEART, x, y, z, 0.1f, 0.1f, 0.1f, 0.1f, 5);
+                player.getWorld().getEntitiesByType(
+                        TypeFilter.instanceOf(LivingEntity.class),
+                        new Box(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1),
+                        entity -> entity != player
+                ).forEach(entity -> {
+                    if (entity.isPlayer()) { PlayerEntity player1 = (PlayerEntity) entity;
+                        if (player1.isCreative() || player1.isSpectator()) return;
+                        PotionEffect.add(player1, StatusEffects.REGENERATION, 300, 0);
+                        PlayerParticle.show(player1, ParticleTypes.HEART, player1.getX(), player1.getY() + 1.0, player1.getZ(), 1.0F, 0.5F, 1.0F, 0.1F, 8);
+                        PlayerActionBar.showText(player1, "您收到來自 " + player.getName().toString() + "內心的愛意！", Formatting.GOLD);
+                        PlayerActionBar.showText(player, "您對 " + player1.getName().toString() + " 投射了內心的愛意！", Formatting.GOLD);
+                    }
+                });
             }
         }
     }
