@@ -64,6 +64,11 @@ public abstract class HandHeldEffect {
         if (isValid(offHand,"minecraft:flower_banner_pattern",1337001)) {
             if (player.getSteppingBlockState().getBlock().equals(Blocks.WATER))
                 PotionEffect.add(player, StatusEffects.CONDUIT_POWER, 10, 1);
+            else if (!player.getSteppingBlockState().getBlock().equals(Blocks.WATER)
+            && player.getWorld().getBlockState(player.getBlockPos().add(0, 1, 0)).getBlock().equals(Blocks.WATER)){
+                PotionEffect.add(player, StatusEffects.WATER_BREATHING, 10, 1);
+                PotionEffect.add(player, StatusEffects.NIGHT_VISION, 10, 1);
+            }
         }
 
         //HowItem:purple_omamori
