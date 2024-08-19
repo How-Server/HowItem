@@ -241,8 +241,8 @@ public abstract class HandHeldEffect {
                         if (player1.isCreative() || player1.isSpectator()) return;
                         PotionEffect.add(player1, StatusEffects.REGENERATION, 300, 0);
                         PlayerParticle.show(player1, ParticleTypes.HEART, player1.getX(), player1.getY() + 1.0, player1.getZ(), 1.0F, 0.5F, 1.0F, 0.1F, 8);
-                        PlayerActionBar.showText(player1, "您收到來自 " + player.getName().toString() + "內心的愛意！", Formatting.GOLD);
-                        PlayerActionBar.showText(player, "您對 " + player1.getName().toString() + " 投射了內心的愛意！", Formatting.GOLD);
+                        PlayerActionBar.showText(player1, "您收到來自 " + player.getName().getLiteralString() + "內心的愛意！", Formatting.GOLD);
+                        PlayerActionBar.showText(player, "您對 " + player1.getName().getLiteralString() + " 投射了內心的愛意！", Formatting.GOLD);
                     }
                 });
             }
