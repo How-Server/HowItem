@@ -37,11 +37,11 @@ public abstract class PlayerDeath {
         long interval = currentTime - lastUsedTime;
         //HowItem:totem
         if (isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337025)
-        || isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:skull_banner_pattern", 1)
-        || isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:skull_banner_pattern", 2)
-        || isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:skull_banner_pattern", 3)
-        || isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:skull_banner_pattern", 4)
-        || isValid(player.getStackInHand(Hand.MAIN_HAND), "minecraft:skull_banner_pattern", 5)){
+        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1)
+        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 2)
+        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 3)
+        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 4)
+        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 5)){
             if (interval > 300){
                 player.setHealth(1.0f);
                 ci.cancel();
