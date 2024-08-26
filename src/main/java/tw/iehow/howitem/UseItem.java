@@ -69,7 +69,7 @@ public class UseItem {
             //HowItem:pencil
             if (isValid(stack, Items.MOJANG_BANNER_PATTERN, 1337018)) {
                 if (interval < 40){
-                    penShoot(player, 0.5F, 8, false, false, 1);
+                    penShoot(player, 3.0F, 8, false, false, 2);
                     PlayerActionBar.showCD(player, 40 - interval);
                     PlayerSound.onlyPlay(player, SoundEvents.BLOCK_CHERRY_SAPLING_BREAK, 1.0f, 1.0f);
                 } else {
@@ -83,7 +83,7 @@ public class UseItem {
             //HowItem:fountain
             if (isValid(stack, Items.MOJANG_BANNER_PATTERN, 1337019)) {
                 if (interval < 40){
-                    penShoot(player, 1.0F, 16, false, false, 1);
+                    penShoot(player, 6.0F, 16, false, false, 2);
                     PlayerActionBar.showCD(player, 40 - interval);
                     PlayerSound.onlyPlay(player, SoundEvents.BLOCK_HANGING_SIGN_WAXED_INTERACT_FAIL, 1.0f, 1.0f);
                 } else {
@@ -97,7 +97,7 @@ public class UseItem {
             //HowItem:brush
             if (isValid(stack, Items.MOJANG_BANNER_PATTERN, 1337021)) {
                 if (interval < 40){
-                    penShoot(player, 1.0F, 16, false, false, 1);
+                    penShoot(player, 6.0F, 16, false, false, 2);
                     PlayerActionBar.showCD(player, 40 - interval);
                     PlayerSound.onlyPlay(player, SoundEvents.BLOCK_HANGING_SIGN_WAXED_INTERACT_FAIL, 1.0f, 1.0f);
                 } else {
@@ -111,7 +111,7 @@ public class UseItem {
             //HowItem:gold_pen
             if (isValid(stack, Items.MOJANG_BANNER_PATTERN, 1337020)) {
                 if (interval < 40){
-                    penShoot(player, 1.0F, 16, false, true, 1);
+                    penShoot(player, 6.0F, 16, false, true, 2);
                     PlayerActionBar.showCD(player, 40 - interval);
                     PlayerSound.onlyPlay(player, SoundEvents.BLOCK_HANGING_SIGN_WAXED_INTERACT_FAIL, 1.0f, 1.0f);
                 } else {
