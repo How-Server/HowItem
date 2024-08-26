@@ -6,12 +6,15 @@ import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -34,7 +37,8 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 public class UseItem {
     private static final Map<UUID, Long> cooldown = new HashMap<>();
 
-    public static void safeMainHand(PlayerEntity player, Hand hand) {
+    public static void safeHand(PlayerEntity player, Hand hand) {
+        ItemCooldownManager cooldownManager = player.getItemCooldownManager();
         if (hand == Hand.MAIN_HAND) {
             ItemStack stack = player.getStackInHand(hand);
             //HowItem:popcicle_stick
@@ -55,11 +59,25 @@ public class UseItem {
                 player.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(1.5d);
                 player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.05d);
             }
-            if(isValid(stack, Items.GOAT_HORN, 1337001)) {
+            //HowItem:goat
+            if(isValid(stack, Items.GOAT_HORN, 1337001) && !cooldownManager.isCoolingDown(stack.getItem())) {
+                PlayerSound.play(player, SoundEvent.of(Identifier.of("minecraft:item.goat_horn.sound.mediv")), 1.0f, 1.0f);
                 for (PlayerEntity player1 : player.getWorld().getPlayers()) {
                     if (player.distanceTo(player1) < 16) {
-                        PotionEffect.add(player1, StatusEffects.STRENGTH, 100, 1);
-                        PotionEffect.add(player1, StatusEffects.ABSORPTION, 100, 1);
+                        PotionEffect.add(player1, StatusEffects.STRENGTH, 200, 1);
+                        PotionEffect.add(player1, StatusEffects.ABSORPTION, 200, 1);
+                    }
+                }
+            }
+        }
+        if (hand == Hand.OFF_HAND) {
+            ItemStack stack = player.getStackInHand(hand);
+            if(isValid(stack, Items.GOAT_HORN, 1337001) && !cooldownManager.isCoolingDown(stack.getItem())) {
+                PlayerSound.play(player, SoundEvent.of(Identifier.of("minecraft:item.goat_horn.sound.fun")), 1.0f, 1.0f);
+                for (PlayerEntity player1 : player.getWorld().getPlayers()) {
+                    if (player.distanceTo(player1) < 16) {
+                        PotionEffect.add(player1, StatusEffects.SPEED, 600, 1);
+                        PotionEffect.add(player1, StatusEffects.JUMP_BOOST, 600, 1);
                     }
                 }
             }

@@ -34,7 +34,7 @@ public class HowItem implements ModInitializer {
 
 		UseItemCallback.EVENT.register((player, world, hand) -> {
 			ItemStack stack = player.getStackInHand(hand);
-			UseItem.safeMainHand(player, hand);
+			UseItem.safeHand(player, hand);
 			if (ClaimCheck.useItem(player, hand)){return TypedActionResult.fail(stack);}
 			UseItem.unsafeMainHand(player, hand); // after claim check
 			return TypedActionResult.pass(stack);
