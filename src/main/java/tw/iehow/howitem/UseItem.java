@@ -122,6 +122,14 @@ public class UseItem {
                     PotionEffect.add(player, StatusEffects.WEAKNESS, 40, 1);
                 }
             }
+            if(isValid(stack, Items.GOAT_HORN, 1337001)) {
+                for (PlayerEntity player1 : player.getWorld().getPlayers()) {
+                    if (player.distanceTo(player1) < 16) {
+                        PotionEffect.add(player1, StatusEffects.STRENGTH, 100, 1);
+                        PotionEffect.add(player1, StatusEffects.ABSORPTION, 100, 1);
+                    }
+                }
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package tw.iehow.howitem.mixin;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
@@ -197,6 +198,13 @@ public abstract class HandHeldEffect {
         //HowItem:chocolate_box
         if (isValid(offHand, "minecraft:skull_banner_pattern", 1337029)){
             PlayerParticle.show(serverPlayer, ParticleTypes.CHERRY_LEAVES, player.getX(), player.getY() + 2.0, player.getZ(), 1.5F, 0.5F, 1.5F, 1, 2);
+        }
+        //HowItem:howbrella(opened)
+        if (isValid(offHand, "minecraft:crossbow", 1337002)){
+            if (!offHand.get(DataComponentTypes.CHARGED_PROJECTILES).isEmpty()){
+                PotionEffect.add(player, StatusEffects.SLOW_FALLING, 10, 1);
+                PotionEffect.add(player, StatusEffects.RESISTANCE, 10, 1);
+            }
         }
     }
 
