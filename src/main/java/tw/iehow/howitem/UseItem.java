@@ -55,6 +55,14 @@ public class UseItem {
                 player.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(1.5d);
                 player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.05d);
             }
+            if(isValid(stack, Items.GOAT_HORN, 1337001)) {
+                for (PlayerEntity player1 : player.getWorld().getPlayers()) {
+                    if (player.distanceTo(player1) < 16) {
+                        PotionEffect.add(player1, StatusEffects.STRENGTH, 100, 1);
+                        PotionEffect.add(player1, StatusEffects.ABSORPTION, 100, 1);
+                    }
+                }
+            }
         }
     }
 
@@ -120,14 +128,6 @@ public class UseItem {
                     PlayerSound.onlyPlay(player, SoundEvents.ENTITY_SQUID_SQUIRT, 1.0f, 1.0f);
                     PotionEffect.add(player, StatusEffects.SLOWNESS, 40, 1);
                     PotionEffect.add(player, StatusEffects.WEAKNESS, 40, 1);
-                }
-            }
-            if(isValid(stack, Items.GOAT_HORN, 1337001)) {
-                for (PlayerEntity player1 : player.getWorld().getPlayers()) {
-                    if (player.distanceTo(player1) < 16) {
-                        PotionEffect.add(player1, StatusEffects.STRENGTH, 100, 1);
-                        PotionEffect.add(player1, StatusEffects.ABSORPTION, 100, 1);
-                    }
                 }
             }
         }
