@@ -1,0 +1,61 @@
+package tw.iehow.howitem.mixin;
+
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import me.drex.itsours.claim.AbstractClaim;
+import me.drex.itsours.claim.list.ClaimList;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.Node;
+import net.luckperms.api.node.types.PermissionNode;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tw.iehow.howitem.items.bottle;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import static tw.iehow.howitem.util.check.SlotCheck.isValid;
+
+@Mixin(Item.class)
+public abstract class FinishingUsing {
+    @Shadow public abstract TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand);
+
+    @Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
+    public void afterUse(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) throws CommandSyntaxException {
+        if(isValid(stack, Items.APPLE, 1337001)
+                || isValid(stack, Items.GOLDEN_APPLE, 1337010)
+                || isValid(stack, Items.GOLDEN_CARROT, 1337004)) {
+            PlayerEntity playerEntity = (PlayerEntity) user;
+            ItemEntity item = playerEntity.dropItem(bottle.usedBottle(), true);
+            Objects.requireNonNull(item).setPickupDelay(0);
+        }
+        else if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
+            User user1 = LuckPermsProvider.get().getUserManager().getUser(user.getUuid());
+            long expiryDuration = 0;
+            for (Node node : user1.data().toCollection()) {
+                if (node.getKey().equals("itsours.fly") && node.hasExpiry()) {
+                    expiryDuration = node.getExpiryDuration().toSeconds();
+                    user1.data().remove(node);
+                }
+            }
+            user1.data().add(PermissionNode.builder("itsours.fly").expiry(43200 + expiryDuration, TimeUnit.SECONDS).build());
+            LuckPermsProvider.get().getUserManager().saveUser(user1);
+            Optional<AbstractClaim> optional = ClaimList.getClaimAt(user);
+            optional.ifPresent(claim -> claim.onEnter(null, (ServerPlayerEntity) user));
+        }
+    }
+}

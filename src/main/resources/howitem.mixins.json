@@ -3,7 +3,8 @@
   "package": "tw.iehow.howitem.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EatFood",
+    "CrossBow",
+    "FinishingUsing",
     "HandHeldEffect",
     "PlayerDeath",
     "VillagerTrade"
