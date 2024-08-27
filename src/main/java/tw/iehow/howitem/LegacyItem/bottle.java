@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.LegacyItem;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.component.DataComponentTypes;
@@ -11,13 +11,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class bottle {
     public static ItemStack usedBottle() throws CommandSyntaxException {
