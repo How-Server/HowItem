@@ -8,7 +8,7 @@ import net.minecraft.util.Hand;
 import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PlayerSound;
 
-import static tw.iehow.howitem.LegacyItem.vip2407.how_popcicle_stick;
+import static tw.iehow.howitem.LegacyItem.PopcicleDisplay.how_popcicle_stick;
 
 public class PopiclePudding extends BaseHowItem {
 

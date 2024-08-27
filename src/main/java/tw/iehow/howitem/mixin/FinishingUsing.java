@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tw.iehow.howitem.LegacyItem.bottle;
+import tw.iehow.howitem.LegacyItem.PlasticBottle;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -40,7 +40,7 @@ public abstract class FinishingUsing {
                 || isValid(stack, Items.GOLDEN_APPLE, 1337010)
                 || isValid(stack, Items.GOLDEN_CARROT, 1337004)) {
             PlayerEntity playerEntity = (PlayerEntity) user;
-            ItemEntity item = playerEntity.dropItem(bottle.usedBottle(), true);
+            ItemEntity item = playerEntity.dropItem(PlasticBottle.usedBottle(), true);
             Objects.requireNonNull(item).setPickupDelay(0);
         }
         else if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {

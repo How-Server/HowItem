@@ -17,7 +17,7 @@ import net.minecraft.util.Unit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class bottle {
+public class PlasticBottle {
     public static ItemStack usedBottle() throws CommandSyntaxException {
         ItemStack stack = Items.FLINT.getDefaultStack();
         stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337002));

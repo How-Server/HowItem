@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class vip2407 {
+public class PopcicleDisplay {
     public static ItemStack how_popcicle_stick(){
         ItemStack stack = Items.MOJANG_BANNER_PATTERN.getDefaultStack();
         stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337013));

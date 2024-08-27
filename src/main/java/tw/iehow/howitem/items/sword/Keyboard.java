@@ -24,6 +24,7 @@ public class Keyboard extends BaseHowItem {
         long cooldown = CooldownManager.get(player.getUuid(), CooldownType.SWORD);
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
+            return;
         }
         LivingEntity livingEntity = (LivingEntity) entity;
         PotionEffect.add(livingEntity, StatusEffects.NAUSEA, 150, 1);

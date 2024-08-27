@@ -24,6 +24,7 @@ public class HowDrum extends BaseHowItem {
         long cooldown = CooldownManager.get(player.getUuid(), CooldownType.TOY);
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
+            return;
         }
         world.createExplosion(null, null, null, entity.getX(), entity.getY(), entity.getZ(), 1.0F, false, World.ExplosionSourceType.NONE);
         PlayerSound.play(serverPlayer, SoundEvents.ENTITY_WARDEN_SONIC_BOOM, 1.0F, 1.0F);
