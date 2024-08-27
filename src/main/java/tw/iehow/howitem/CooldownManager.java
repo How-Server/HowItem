@@ -8,23 +8,26 @@ import java.util.Map;
 import java.util.UUID;
 
 public class CooldownManager {
-    private static final Map<UUID, Map<CooldownType,Long>> cooldown = new HashMap<>();
+    private static final Map<UUID, Map<CooldownType, Long>> cooldown = new HashMap<>();
     private static MinecraftServer server;
 
-    public static long get(UUID uuid, CooldownType pool){
+    public static long get(UUID uuid, CooldownType pool) {
         cooldown.computeIfAbsent(uuid, k -> new HashMap<>());
         long cooldownTime = cooldown.get(uuid).getOrDefault(pool, 0L);
-        return Math.max( cooldownTime - server.getTicks() ,0);
+        return Math.max(cooldownTime - server.getTicks(), 0);
     }
 
-    public static void set(UUID uuid,CooldownType pool,long cd) {
+    public static void set(UUID uuid, CooldownType pool, long cd) {
         cooldown.computeIfAbsent(uuid, k -> new HashMap<>());
-        cooldown.get(uuid).put(pool,server.getTicks() + cd);
+        cooldown.get(uuid).put(pool, server.getTicks() + cd);
     }
 
-    public static void setServer(MinecraftServer actualServer)
-    {
-        if(server != null){
+    public static MinecraftServer getServer() {
+        return server;
+    }
+
+    public static void setServer(MinecraftServer actualServer) {
+        if (server != null) {
             return;
         }
         server = actualServer;

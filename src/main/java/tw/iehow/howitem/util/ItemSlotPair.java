@@ -1,4 +1,4 @@
-package tw.iehow.howitem;
+package tw.iehow.howitem.util;
 
 import net.minecraft.item.ItemStack;
 import tw.iehow.howitem.enums.TriggerType;

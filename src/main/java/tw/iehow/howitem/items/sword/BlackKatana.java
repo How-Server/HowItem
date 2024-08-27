@@ -1,12 +1,12 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.sword;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PotionEffect;
 
 public class BlackKatana extends BaseHowItem {

@@ -8,13 +8,13 @@ import net.minecraft.util.Formatting;
 public class PlayerActionBar {
     public static void showCD(ServerPlayerEntity player, long CD) {
         Text cd = Text.literal("道具CD ").formatted(Formatting.YELLOW)
-                .append(Text.literal(String.valueOf(CD / 20)).formatted(Formatting.WHITE))
+                .append(Text.literal(String.format("%.1f", CD / 20f)).formatted(Formatting.WHITE))
                 .append(" 秒");
             player.sendMessage(cd, true);
         }
     public static void showCD(PlayerEntity player, long CD) {
         Text cd = Text.literal("道具CD ").formatted(Formatting.YELLOW)
-                .append(Text.literal(String.valueOf(CD / 20)).formatted(Formatting.WHITE))
+                .append(Text.literal(String.format("%.1f", CD / 20f)).formatted(Formatting.WHITE))
                 .append(" 秒");
 
         player.sendMessage(cd, true);

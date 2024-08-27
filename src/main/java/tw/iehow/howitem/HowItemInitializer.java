@@ -9,12 +9,12 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.structure.OceanMonumentGenerator;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import tw.iehow.howitem.enums.TriggerType;
 import tw.iehow.howitem.items.BaseHowItem;
+import tw.iehow.howitem.util.ItemSlotPair;
 import tw.iehow.howitem.util.check.ClaimCheck;
 import tw.iehow.howitem.util.check.EntityCheck;
 import tw.iehow.howitem.util.placeholder.register;
@@ -72,7 +72,7 @@ public class HowItemInitializer implements ModInitializer {
                 }
             }
 
-            for(BaseHowItem item : trigger){
+            for (BaseHowItem item : trigger) {
                 item.beforeSafeAttack(player, world, entity);
             }
 
@@ -84,7 +84,7 @@ public class HowItemInitializer implements ModInitializer {
                 return ActionResult.PASS;
             }
 
-            for(BaseHowItem item : trigger){
+            for (BaseHowItem item : trigger) {
                 item.beforeUnsafeAttack(player, world, entity);
             }
 
@@ -94,20 +94,22 @@ public class HowItemInitializer implements ModInitializer {
         UseItemCallback.EVENT.register((player, world, hand) -> {
             ItemStack stack = player.getStackInHand(hand);
             CustomModelDataComponent cmd = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA);
-
-            BaseHowItem targetItem = items.get(Objects.hash(stack, cmd));
+            if (cmd == null) {
+                return TypedActionResult.pass(stack);
+            }
+            BaseHowItem targetItem = items.get(Objects.hash(stack.getItem().toString(), cmd.value()));
 
             if (targetItem == null) {
                 return TypedActionResult.pass(stack);
             }
 
-            targetItem.safeUse(hand);
+            targetItem.safeUse(player, hand);
 
             if (ClaimCheck.useItem(player, hand)) {
                 return TypedActionResult.fail(stack);
             }
 
-            targetItem.unsafeUse(hand);
+            targetItem.unsafeUse(player, hand);
 
             return TypedActionResult.pass(stack);
         });

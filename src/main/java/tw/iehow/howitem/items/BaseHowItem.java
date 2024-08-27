@@ -1,10 +1,9 @@
 package tw.iehow.howitem.items;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import tw.iehow.howitem.enums.TriggerType;
@@ -52,10 +51,10 @@ public abstract class BaseHowItem {
         return triggerTypes.contains(type);
     }
 
-    public void safeUse(Hand hand) {
+    public void safeUse(PlayerEntity player, Hand hand) {
     }
 
-    public void unsafeUse(Hand hand) {
+    public void unsafeUse(PlayerEntity player, Hand hand) {
     }
 
     public void safeAttack(PlayerEntity player, World world, Entity entity) {
