@@ -1,6 +1,7 @@
 package tw.iehow.howitem.mixin;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -25,6 +26,10 @@ public abstract class VillagerTrade {
         if (villagersAround.size() > 32 && customer.getWorld().getRegistryKey().equals(World.OVERWORLD)) {
             customer.sendMessage(Text.literal("無法與村民交易，周圍 64 格內超過 32 隻村民，請將村民分散，避免同時載入過多村民").formatted(Formatting.RED), true);
             ci.cancel();
+        }
+
+        if(villager.getCommandTags().contains("official")){
+            customer.removeStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE);
         }
     }
 }

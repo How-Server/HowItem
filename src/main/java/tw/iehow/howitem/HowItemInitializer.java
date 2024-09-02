@@ -3,7 +3,6 @@ package tw.iehow.howitem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
@@ -28,15 +27,6 @@ import java.util.Objects;
 public class HowItemInitializer implements ModInitializer {
     @Override
     public void onInitialize() {
-        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (ClaimCheck.useEntity(player, entity)) {
-                return ActionResult.FAIL;
-            }
-
-            UseEffect.mainHand(player, entity);
-            return ActionResult.PASS;
-        });
-
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             new register().levelPlaceHolder();
             CooldownManager.setServer(server);
