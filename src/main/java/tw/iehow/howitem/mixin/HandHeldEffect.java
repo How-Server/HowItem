@@ -203,7 +203,7 @@ public abstract class HandHeldEffect {
         if (isValid(offHand, "minecraft:crossbow", 1337002)){
             if (!offHand.get(DataComponentTypes.CHARGED_PROJECTILES).isEmpty()){
                 PotionEffect.add(player, StatusEffects.SLOW_FALLING, 10, 1);
-                PotionEffect.add(player, StatusEffects.RESISTANCE, 10, 1);
+                PotionEffect.add(player, StatusEffects.RESISTANCE, 10, 0);
             }
         }
     }

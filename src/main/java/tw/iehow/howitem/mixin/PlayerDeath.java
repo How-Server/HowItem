@@ -45,8 +45,8 @@ public abstract class PlayerDeath {
             if (interval > 300){
                 player.setHealth(1.0f);
                 ci.cancel();
-                PotionEffect.add(player, StatusEffects.REGENERATION,60,4);
-                PotionEffect.add(player, StatusEffects.ABSORPTION,300,2);
+                PotionEffect.add(player, StatusEffects.REGENERATION,100,2);
+                PotionEffect.add(player, StatusEffects.ABSORPTION,100,1);
                 PlayerSound.play(player, SoundEvents.ITEM_TOTEM_USE, 0.6f, 1.0f);
                 PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
                 cooldown.put(playerUuid, currentTime);
@@ -60,8 +60,8 @@ public abstract class PlayerDeath {
             if (interval > 1200){
                 player.setHealth(1.0f);
                 ci.cancel();
-                PotionEffect.add(player, StatusEffects.REGENERATION,60,2);
-                PotionEffect.add(player, StatusEffects.ABSORPTION,300,1);
+                PotionEffect.add(player, StatusEffects.REGENERATION,100,2);
+                PotionEffect.add(player, StatusEffects.ABSORPTION,100,1);
                 PlayerSound.play(player, SoundEvents.ITEM_TOTEM_USE, 0.6f, 1.0f);
                 PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
                 cooldown.put(playerUuid, currentTime);
