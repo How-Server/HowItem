@@ -27,6 +27,7 @@ public class ItemManager {
                 new PopicleChocolate(),
                 new PopicleSoda(),
                 new PopiclePudding(),
+                new PopicleStrawberry(),
                 new BlackKatana(),
                 new BlueKatana(),
                 new Keyboard(),
