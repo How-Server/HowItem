@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"tw.iehow.howitem.HowItem"
+			"tw.iehow.howitem.HowItemInitializer"
 		]
 	},
 	"mixins": [
