@@ -6,7 +6,7 @@ import me.drex.itsours.claim.list.ClaimList;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
-import net.luckperms.api.node.types.PermissionNode;
+import net.luckperms.api.node.types.InheritanceNode;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,13 +46,13 @@ public abstract class FinishingUsing {
         else if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
             User user1 = LuckPermsProvider.get().getUserManager().getUser(user.getUuid());
             long expiryDuration = 0;
-            for (Node node : user1.data().toCollection()) {
-                if (node.getKey().equals("itsours.fly") && node.hasExpiry()) {
+            for (Node node : user1.getNodes()) {
+                if (node.getKey().equals("group.lobster") && node.hasExpiry()) {
                     expiryDuration = node.getExpiryDuration().toSeconds();
                     user1.data().remove(node);
                 }
             }
-            user1.data().add(PermissionNode.builder("itsours.fly").expiry(43200 + expiryDuration, TimeUnit.SECONDS).build());
+            user1.data().add(InheritanceNode.builder("lobster").expiry(43200 + expiryDuration, TimeUnit.SECONDS).build());
             LuckPermsProvider.get().getUserManager().saveUser(user1);
             Optional<AbstractClaim> optional = ClaimList.getClaimAt(user);
             optional.ifPresent(claim -> claim.onEnter(null, (ServerPlayerEntity) user));
