@@ -61,7 +61,7 @@ public class GoldenFountainPen extends BaseHowItem {
                     if (player1.isCreative() || player1.isSpectator() || ClaimCheck.canPvP(player, player.getWorld()))
                         return;
                 }
-                entity.damage(player.getDamageSources().magic(), damage);
+                entity.damage(player.getDamageSources().mobProjectile(player, player), damage);
                 PlayerSound.onlyPlay(player, SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 0.5f, 0.94f);
                 if (!advanced) {
                     return;
