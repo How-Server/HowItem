@@ -30,6 +30,7 @@ import tw.iehow.howitem.util.check.DimensionCheck;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -46,6 +47,7 @@ public abstract class HandHeldEffect {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo info) {
+        Random random = new Random();
         //Get player info
         PlayerEntity player = ((PlayerEntity)(Object)this);
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
@@ -204,6 +206,18 @@ public abstract class HandHeldEffect {
             if (!offHand.get(DataComponentTypes.CHARGED_PROJECTILES).isEmpty()){
                 PotionEffect.add(player, StatusEffects.SLOW_FALLING, 10, 1);
                 PotionEffect.add(player, StatusEffects.RESISTANCE, 10, 0);
+            }
+        }
+        //HowItem:rabbit
+        if (isValid(head, "minecraft:flower_banner_pattern", 1337062)){
+            PotionEffect.add(player, StatusEffects.JUMP_BOOST, 2, random.nextInt(5));
+            if (random.nextInt(100) > 97
+                    && (player.getSteppingBlockState().getBlock().equals(Blocks.AIR) || player.getSteppingBlockState().getBlock().equals(Blocks.LIGHT))
+                    && !player.getAbilities().flying
+                    && !player.hasStatusEffect(StatusEffects.INVISIBILITY)){
+                PotionEffect.add(player, StatusEffects.INVISIBILITY, 200, 1);
+                PlayerParticle.show(player, ParticleTypes.POOF, player.getX(), player.getY() + 0.8, player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 50);
+                PlayerSound.play(player, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.5F, 1.0F);
             }
         }
     }
