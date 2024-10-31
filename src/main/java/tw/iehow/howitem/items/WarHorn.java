@@ -19,7 +19,7 @@ public class WarHorn extends BaseHowItem {
 
     public void safeUse(PlayerEntity player, Hand hand) {
         ItemCooldownManager cooldownManager = player.getItemCooldownManager();
-        if (cooldownManager.isCoolingDown(player.getStackInHand(hand).getItem())) {
+        if (cooldownManager.isCoolingDown(player.getStackInHand(hand))) {
             return;
         }
 

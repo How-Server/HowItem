@@ -14,11 +14,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -32,9 +29,8 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(Item.class)
 public abstract class FinishingUsing {
-    @Shadow public abstract TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand);
 
-    @Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "finishUsing", at = @At("HEAD"))
     public void afterUse(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) throws CommandSyntaxException {
         if(isValid(stack, Items.APPLE, 1337001)
                 || isValid(stack, Items.GOLDEN_APPLE, 1337010)

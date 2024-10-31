@@ -10,7 +10,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import tw.iehow.howitem.enums.TriggerType;
 import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.ItemSlotPair;
@@ -85,23 +84,23 @@ public class HowItemInitializer implements ModInitializer {
             ItemStack stack = player.getStackInHand(hand);
             CustomModelDataComponent cmd = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA);
             if (cmd == null) {
-                return TypedActionResult.pass(stack);
+                return ActionResult.PASS;
             }
             BaseHowItem targetItem = items.get(Objects.hash(stack.getItem().toString(), cmd.value()));
 
             if (targetItem == null) {
-                return TypedActionResult.pass(stack);
+                return ActionResult.PASS;
             }
 
             targetItem.safeUse(player, hand);
 
             if (ClaimCheck.useItem(player, hand)) {
-                return TypedActionResult.fail(stack);
+                return ActionResult.FAIL;
             }
 
             targetItem.unsafeUse(player, hand);
 
-            return TypedActionResult.pass(stack);
+            return ActionResult.PASS;
         });
 
     }

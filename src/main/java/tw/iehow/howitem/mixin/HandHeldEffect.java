@@ -161,7 +161,7 @@ public abstract class HandHeldEffect {
         }
         //HowItem:student_hat
         if (isValid(head, "minecraft:skull_banner_pattern", 1337020)){
-            if (player.isSneaking() && !player.isFallFlying()){
+            if (player.isSneaking() && !player.getAbilities().flying){
                 PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
                 PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
             }

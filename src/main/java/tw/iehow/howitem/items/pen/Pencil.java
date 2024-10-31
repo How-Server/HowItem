@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypeFilter;
@@ -61,7 +62,7 @@ public class Pencil extends BaseHowItem {
                     if (player1.isCreative() || player1.isSpectator() || ClaimCheck.canPvP(player, player.getWorld()))
                         return;
                 }
-            entity.damage(player.getDamageSources().mobProjectile(player, player), damage);
+            entity.damage((ServerWorld) player.getWorld(), player.getDamageSources().mobProjectile(player, player), damage);
                 PlayerSound.onlyPlay(player, SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 0.5f, 0.94f);
                 if (!advanced) {
                     return;

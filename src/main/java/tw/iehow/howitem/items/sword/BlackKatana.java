@@ -18,8 +18,8 @@ public class BlackKatana extends BaseHowItem {
 
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
 
-        if (entity instanceof PlayerEntity) {
-            if (entity.hasPermissionLevel(4)) return;
+        if (entity instanceof PlayerEntity playerEntity) {
+            if (playerEntity.hasPermissionLevel(4)) return;
         }
         LivingEntity livingEntity = (LivingEntity) entity;
         PotionEffect.add(livingEntity, StatusEffects.WITHER, 100, 1);

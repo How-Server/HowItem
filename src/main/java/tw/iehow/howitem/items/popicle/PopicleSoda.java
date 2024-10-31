@@ -18,9 +18,9 @@ public class PopicleSoda extends BaseHowItem {
 
     public void safeUse(PlayerEntity player, Hand hand) {
         PlayerSound.onlyPlay(player, SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 1.0f, 0.94f);
-        PlayerSound.play(player, SoundEvents.ENTITY_GENERIC_EAT, 1.0f, 1.0f);
+        PlayerSound.play(player, SoundEvents.ENTITY_GENERIC_EAT.value(), 1.0f, 1.0f);
         player.setStackInHand(hand, how_popcicle_stick());
-        player.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(1.5d);
-        player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.05d);
+        player.getAttributeInstance(EntityAttributes.SCALE).setBaseValue(1.5d);
+        player.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.05d);
     }
 }
