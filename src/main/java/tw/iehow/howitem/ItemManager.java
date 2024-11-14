@@ -32,6 +32,7 @@ public class ItemManager {
                 new BlueKatana(),
                 new Keyboard(),
                 new SakuraKatana(),
+                new HowStick(),
         };
         for (BaseHowItem item : items) {
             itemMap.put(item.getHash(), item);
