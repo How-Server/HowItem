@@ -16,9 +16,8 @@ public class WarHorn extends BaseHowItem {
         super(Items.GOAT_HORN, 1337001);
     }
 
-
+    ItemCooldownManager cooldownManager = new ItemCooldownManager();
     public void safeUse(PlayerEntity player, Hand hand) {
-        ItemCooldownManager cooldownManager = player.getItemCooldownManager();
         if (cooldownManager.isCoolingDown(player.getStackInHand(hand))) {
             return;
         }
@@ -31,6 +30,7 @@ public class WarHorn extends BaseHowItem {
     }
 
     private void attackHorn(PlayerEntity player) {
+    cooldownManager.set(player.getStackInHand(Hand.MAIN_HAND), 200);
         PlayerSound.play(player, SoundEvent.of(Identifier.of("minecraft:item.goat_horn.sound.mediv")), 1.0f, 1.0f);
         for (PlayerEntity player1 : player.getWorld().getPlayers()) {
             if (player.distanceTo(player1) < 16) {
@@ -41,6 +41,7 @@ public class WarHorn extends BaseHowItem {
     }
 
     private void movementHorn(PlayerEntity player) {
+        cooldownManager.set(player.getStackInHand(Hand.OFF_HAND), 600);
         PlayerSound.play(player, SoundEvent.of(Identifier.of("minecraft:item.goat_horn.sound.fun")), 1.0f, 1.0f);
         for (PlayerEntity player1 : player.getWorld().getPlayers()) {
             if (player.distanceTo(player1) < 16) {
