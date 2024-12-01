@@ -7,11 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -54,6 +56,7 @@ public abstract class HandHeldEffect {
         ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
         ItemStack hand = ((PlayerEntity)(Object)this).getStackInHand(Hand.MAIN_HAND);
         ItemStack head = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD);
+        ItemStack chest = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST);
         //Timestamp for CD
         UUID playerUuid = player.getUuid();
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
@@ -219,6 +222,10 @@ public abstract class HandHeldEffect {
                 PlayerParticle.show(player, ParticleTypes.POOF, player.getX(), player.getY() + 0.8, player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 50);
                 PlayerSound.play(player, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.5F, 1.0F);
             }
+        }
+        //HowItem:sweater
+        if (isValid(chest, Items.NETHERITE_CHESTPLATE, Identifier.of("minecraft:sweater_how"))){
+            PotionEffect.add(player, StatusEffects.HASTE, 10, 1);
         }
     }
 

@@ -41,4 +41,20 @@ public class SlotCheck {
         }
         return false;
     }
+    public static boolean isValid(ItemStack stack, Item item, Identifier itemModel) {
+        if (!stack.isEmpty()) {
+
+            if (stack.getItem() != item) {
+                return false;
+            }
+
+            if (!stack.getComponents().contains(DataComponentTypes.ITEM_MODEL)) {
+                return false;
+            }
+
+            Identifier actualItemModel = stack.getComponents().get(DataComponentTypes.ITEM_MODEL);
+            return actualItemModel.equals(itemModel);
+        }
+        return false;
+    }
 }
