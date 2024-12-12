@@ -5,6 +5,7 @@
   "mixins": [
     "CrossBow",
     "FinishingUsing",
+    "GoatHorn",
     "HandHeldEffect",
     "PlayerDeath",
     "VillagerTrade"
