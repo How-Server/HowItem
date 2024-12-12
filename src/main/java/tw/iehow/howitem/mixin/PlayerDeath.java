@@ -2,6 +2,7 @@ package tw.iehow.howitem.mixin;
 
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
@@ -36,12 +37,12 @@ public abstract class PlayerDeath {
         long currentTime = player.getWorld().getTime();
         long interval = currentTime - lastUsedTime;
         //HowItem:totem
-        if (isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337025)
-        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1)
-        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 2)
-        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 3)
-        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 4)
-        || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 5)){
+        if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1)
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 2)
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 3)
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 4)
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 5)){
             if (interval > 300){
                 player.setHealth(1.0f);
                 ci.cancel();
@@ -51,12 +52,12 @@ public abstract class PlayerDeath {
                 PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
                 cooldown.put(playerUuid, currentTime);
             }
-        } else if (isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337031)
-                || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337032)
-                || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337033)
-                || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337034)
-                || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337035)
-                || isValid(player.getStackInHand(Hand.OFF_HAND), "minecraft:skull_banner_pattern", 1337036)){
+        } else if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031)
+                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337032)
+                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337033)
+                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337034)
+                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337035)
+                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337036)){
             if (interval > 1200){
                 player.setHealth(1.0f);
                 ci.cancel();

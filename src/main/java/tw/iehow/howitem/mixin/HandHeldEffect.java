@@ -67,7 +67,7 @@ public abstract class HandHeldEffect {
         float absorptionAmount = player.getAbsorptionAmount();
 
         //HowItem:blue_omamori
-        if (isValid(offHand,"minecraft:flower_banner_pattern",1337001)) {
+        if (isValid(offHand, Items.FLOWER_BANNER_PATTERN,1337001)) {
             if (player.getSteppingBlockState().getBlock().equals(Blocks.WATER))
                 PotionEffect.add(player, StatusEffects.CONDUIT_POWER, 10, 1);
             else if (!player.getSteppingBlockState().getBlock().equals(Blocks.WATER)
@@ -78,7 +78,7 @@ public abstract class HandHeldEffect {
         }
 
         //HowItem:purple_omamori
-        if (isValid(offHand,"minecraft:flower_banner_pattern",1337002)) {
+        if (isValid(offHand, Items.FLOWER_BANNER_PATTERN,1337002)) {
             PotionEffect.remove(player, StatusEffects.HUNGER);
             PotionEffect.remove(player, StatusEffects.DARKNESS);
             PotionEffect.remove(player, StatusEffects.POISON);
@@ -86,7 +86,7 @@ public abstract class HandHeldEffect {
         }
 
         //HowItem:red_omamori
-        if (isValid(offHand,"minecraft:totem_of_undying",1337001)) {
+        if (isValid(offHand, Items.TOTEM_OF_UNDYING,1337001)) {
             if (interval >= 300 && !absorptionEffect) {
                 PotionEffect.add(player, StatusEffects.ABSORPTION, -1, 3);
                 absorptionAmount = 1.0F;
@@ -97,22 +97,22 @@ public abstract class HandHeldEffect {
                 }
             }
         }
-        if (absorptionEffect && (!isValid(offHand,"minecraft:totem_of_undying",1337001) || absorptionAmount == 0.0F)){
+        if (absorptionEffect && (!isValid(offHand, Items.TOTEM_OF_UNDYING,1337001) || absorptionAmount == 0.0F)){
             PotionEffect.remove(player, StatusEffects.ABSORPTION);
             absorptionEffect = false;
             cooldown.put(playerUuid, currentTime);
         }
 
         //HowItem:blue_omamori
-        if (isValid(offHand,"minecraft:skull_banner_pattern",1337001)) {
+        if (isValid(offHand, Items.SKULL_BANNER_PATTERN,1337001)) {
             PotionEffect.add(player, StatusEffects.SLOWNESS, 25, 1);
             PotionEffect.add(player, StatusEffects.WEAKNESS, 25, 1);
             PotionEffect.add(player, StatusEffects.BLINDNESS, 25, 1);
         }
 
         //HowItem:chinese_valentines_2023/red_rose
-        if (isValid(offHand,"minecraft:flower_banner_pattern",1337028)
-         || isValid(offHand, "minecraft:skull_banner_pattern", 1337029)) {
+        if (isValid(offHand, Items.FLOWER_BANNER_PATTERN,1337028)
+         || isValid(offHand, Items.SKULL_BANNER_PATTERN, 1337029)) {
             if (interval >= 200) {
                 PotionEffect.add(player, StatusEffects.REGENERATION, 80, 1);
                 PlayerParticle.show(serverPlayer, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
@@ -123,7 +123,7 @@ public abstract class HandHeldEffect {
         }
 
         //HowItem:how_water_bucket
-        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337016)){
+        if (isValid(offHand, Items.SKULL_BANNER_PATTERN, 1337016)){
             if (player.getSteppingBlockState().getBlock() == Blocks.MAGMA_BLOCK){
                 PotionEffect.add(player, StatusEffects.FIRE_RESISTANCE,5,1);
                 PlayerParticle.show(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
@@ -140,13 +140,13 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:how_hat
-        if (isValid(head, "minecraft:flower_banner_pattern", 1337030)){
+        if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337030)){
             PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 3.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
             PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.2, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 1);
         }
 
         //HowItem:dragon_head
-        if (isValid(head, "minecraft:flower_banner_pattern", 1337037)){
+        if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337037)){
             for (ServerPlayerEntity player1 : serverPlayer.server.getPlayerManager().getPlayerList()){
                 if (player1.distanceTo(player) < 24.0){
                     PotionEffect.add(player1, StatusEffects.LUCK, 10, 0);
@@ -163,7 +163,7 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:student_hat
-        if (isValid(head, "minecraft:skull_banner_pattern", 1337020)){
+        if (isValid(head, Items.SKULL_BANNER_PATTERN, 1337020)){
             if (player.isSneaking() && !player.getAbilities().flying){
                 PotionEffect.add(player, StatusEffects.JUMP_BOOST, 25, 2);
                 PlayerActionBar.showText(serverPlayer, "先蹲後跳，魚躍龍門。", Formatting.GOLD);
@@ -174,16 +174,16 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:clown
-        if (isValid(head, "minecraft:skull_banner_pattern", 1337021) && DimensionCheck.isSurvival(player)){
-            if (isValid(offHand, "minecraft:flower_banner_pattern", 1337016)){
+        if (isValid(head, Items.SKULL_BANNER_PATTERN, 1337021) && DimensionCheck.isSurvival(player)){
+            if (isValid(offHand,  Items.FLOWER_BANNER_PATTERN, 1337016)){
                 PotionEffect.add(player, StatusEffects.LEVITATION,10,0);
             }
-            if (isValid(hand, "minecraft:flower_banner_pattern", 1337016)){
+            if (isValid(hand, Items.FLOWER_BANNER_PATTERN, 1337016)){
                 PotionEffect.add(player, StatusEffects.SLOW_FALLING,10,0);
             }
         }
         //HowItem:pillow
-        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337023)){
+        if (isValid(offHand, Items.SKULL_BANNER_PATTERN, 1337023)){
             if (player.getHungerManager().isNotFull()){
                 if (interval > 30){
                     PotionEffect.add(player, StatusEffects.SATURATION,1,0);
@@ -197,22 +197,22 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:heart_glasses
-        if (isValid(head, "minecraft:skull_banner_pattern", 1337026)){
+        if (isValid(head, Items.SKULL_BANNER_PATTERN, 1337026)){
             heartShoot(player);
         }
         //HowItem:chocolate_box
-        if (isValid(offHand, "minecraft:skull_banner_pattern", 1337029)){
+        if (isValid(offHand, Items.SKULL_BANNER_PATTERN, 1337029)){
             PlayerParticle.show(serverPlayer, ParticleTypes.CHERRY_LEAVES, player.getX(), player.getY() + 2.0, player.getZ(), 1.5F, 0.5F, 1.5F, 1, 2);
         }
         //HowItem:howbrella(opened)
-        if (isValid(offHand, "minecraft:crossbow", 1337002)){
+        if (isValid(offHand, Items.CROSSBOW, 1337002)){
             if (!offHand.get(DataComponentTypes.CHARGED_PROJECTILES).isEmpty()){
                 PotionEffect.add(player, StatusEffects.SLOW_FALLING, 10, 1);
                 PotionEffect.add(player, StatusEffects.RESISTANCE, 10, 0);
             }
         }
         //HowItem:rabbit
-        if (isValid(head, "minecraft:flower_banner_pattern", 1337062)){
+        if (isValid(head,  Items.FLOWER_BANNER_PATTERN, 1337062)){
             PotionEffect.add(player, StatusEffects.JUMP_BOOST, 2, random.nextInt(5));
             if (random.nextInt(100) > 97
                     && (player.getSteppingBlockState().getBlock().equals(Blocks.AIR) || player.getSteppingBlockState().getBlock().equals(Blocks.LIGHT))
