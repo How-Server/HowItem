@@ -3,7 +3,6 @@ package tw.iehow.howitem.util.check;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
 public class SlotCheck {
@@ -18,8 +17,7 @@ public class SlotCheck {
                 return false;
             }
 
-            int actualCustomModelData = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA).value();
-            return actualCustomModelData == customModelData;
+            return stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA).floats().contains((float) customModelData);
         }
         return false;
     }

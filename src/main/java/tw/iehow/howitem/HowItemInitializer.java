@@ -55,7 +55,7 @@ public class HowItemInitializer implements ModInitializer {
                 if (cmd == null) {
                     continue;
                 }
-                targetItem = items.get(Objects.hash(pair.getStack().getItem().toString(), cmd.value()));
+                targetItem = items.get(Objects.hash(pair.getStack().getItem().toString(), cmd.floats().getFirst()));
                 if (targetItem != null && targetItem.canTrigger((pair.getType()))) {
                     trigger.add(targetItem);
                 }
@@ -86,7 +86,7 @@ public class HowItemInitializer implements ModInitializer {
             if (cmd == null) {
                 return ActionResult.PASS;
             }
-            BaseHowItem targetItem = items.get(Objects.hash(stack.getItem().toString(), cmd.value()));
+            BaseHowItem targetItem = items.get(Objects.hash(stack.getItem().toString(), cmd.floats().getFirst()));
 
             if (targetItem == null) {
                 return ActionResult.PASS;

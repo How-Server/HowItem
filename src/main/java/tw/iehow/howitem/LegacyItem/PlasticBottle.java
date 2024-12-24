@@ -15,12 +15,13 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Unit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PlasticBottle {
     public static ItemStack usedBottle() throws CommandSyntaxException {
         ItemStack stack = Items.FLINT.getDefaultStack();
-        stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337002));
+        stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337002.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
         stack.set(DataComponentTypes.CUSTOM_NAME, Text.literal("用過的空杯").setStyle(Style.EMPTY.withColor(Formatting.GRAY).withItalic(false)));
         List<Text> lore = new ArrayList<>(List.of(
                 Text.literal("烹飪食材").setStyle(Style.EMPTY.withItalic(false).withColor(Formatting.DARK_PURPLE)),

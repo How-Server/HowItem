@@ -15,7 +15,7 @@ import java.util.Objects;
 public abstract class BaseHowItem {
 
     protected Item item;
-    protected int customModelID;
+    protected float customModelID;
     protected boolean bypassDragonPart = false;
     protected List<TriggerType> triggerTypes = new ArrayList<>();
 

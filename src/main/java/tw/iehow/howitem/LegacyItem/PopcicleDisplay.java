@@ -12,13 +12,14 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Unit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class PopcicleDisplay {
     public static ItemStack how_popcicle_stick(){
         ItemStack stack = Items.MOJANG_BANNER_PATTERN.getDefaultStack();
-        stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337013));
+        stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337013.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
         stack.set(DataComponentTypes.CUSTOM_NAME, Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                 .append(Text.literal("棒棒冰棒棍").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false))));
         List<Text> lore = new ArrayList<>(List.of(
@@ -46,25 +47,25 @@ public class PopcicleDisplay {
                 name = Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                         .append(Text.literal("棒棒冰棒").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false)))
                         .append(Text.literal(" 蘇打").setStyle(Style.EMPTY.withItalic(false).withColor(Formatting.AQUA)));
-                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337014));
+                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337014.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                 break;
             case 1:
                 name =Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                         .append(Text.literal("棒棒冰棒").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false)))
                         .append(Text.literal(" 布丁").setStyle(Style.EMPTY.withItalic(false).withColor(Formatting.YELLOW)));
-                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337015));
+                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337015.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                 break;
             case 2:
                 name = Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                         .append(Text.literal("棒棒冰棒").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false)))
                         .append(Text.literal(" 巧克力").setStyle(Style.EMPTY.withItalic(false).withColor(TextColor.fromRgb(0x7B3F00))));
-                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337016));
+                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337016.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                 break;
             case 3:
                 name = Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                         .append(Text.literal("棒棒冰棒").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false)))
                         .append(Text.literal(" 草莓").setStyle(Style.EMPTY.withItalic(false).withColor(TextColor.fromRgb(0xF07585))));
-                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1337017));
+                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(133701.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                 break;
         }
         List<Text> lore = new ArrayList<>(List.of(
