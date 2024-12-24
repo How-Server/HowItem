@@ -140,7 +140,8 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:how_hat
-        if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337030)){
+        if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337030)
+        || isValid(head, Items.SKULL_BANNER_PATTERN, 1337037)){
             PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 3.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
             PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.2, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 1);
         }

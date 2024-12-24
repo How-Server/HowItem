@@ -33,6 +33,7 @@ public class ItemManager {
                 new Keyboard(),
                 new SakuraKatana(),
                 new HowStick(),
+                new Snowman(),
         };
         for (BaseHowItem item : items) {
             itemMap.put(item.getHash(), item);
