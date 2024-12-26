@@ -65,7 +65,7 @@ public class PopcicleDisplay {
                 name = Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
                         .append(Text.literal("棒棒冰棒").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withBold(true).withItalic(false)))
                         .append(Text.literal(" 草莓").setStyle(Style.EMPTY.withItalic(false).withColor(TextColor.fromRgb(0xF07585))));
-                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(133701.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
+                stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337017.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                 break;
         }
         List<Text> lore = new ArrayList<>(List.of(
