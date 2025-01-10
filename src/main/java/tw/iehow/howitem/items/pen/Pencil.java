@@ -32,7 +32,7 @@ public class Pencil extends BaseHowItem {
         super(Items.MOJANG_BANNER_PATTERN, 1337018);
     }
 
-    private static void penShoot(PlayerEntity player, float damage, int range, boolean advanced, boolean gold, int particleCount) {
+    private static void penShoot(PlayerEntity player, float damage, int range, boolean advanced, int particleCount) {
         Random random = new Random();
         Vec3d direction = player.getRotationVector();
         for (int i = 0; i < range; i++) {
@@ -46,9 +46,7 @@ public class Pencil extends BaseHowItem {
                 return;
             }
 
-            if (gold && i > 2 && i % 2 == 0) {
-                PlayerParticle.show(player, ParticleTypes.GLOW_SQUID_INK, x, y, z, 0.6f, 0.1f, 0.6f, 0.1f, particleCount);
-            } else if (!gold && i > 2 && i % 2 == 0) {
+            if (i > 2 && i % 2 == 0) {
                 PlayerParticle.show(player, ParticleTypes.SQUID_INK, x, y, z, 0.6f, 0.1f, 0.6f, 0.1f, particleCount);
             }
 
@@ -83,7 +81,7 @@ public class Pencil extends BaseHowItem {
     public void unsafeUse(PlayerEntity player, Hand hand) {
         long chargeCooldown = CooldownManager.get(player.getUuid(), CooldownType.PEN_CHARGED);
         if (chargeCooldown == 0) {
-            penShoot(player, 3.0F, 8, false, false, 5);
+            penShoot(player, 3.0F, 8, false, 5);
             PlayerSound.onlyPlay(player, SoundEvents.BLOCK_CHERRY_SAPLING_STEP, 1.0f, 1.0f);
             PotionEffect.add(player, StatusEffects.SLOWNESS, 40, 1);
             PotionEffect.add(player, StatusEffects.WEAKNESS, 40, 1);
@@ -92,7 +90,7 @@ public class Pencil extends BaseHowItem {
 
         long cooldown = CooldownManager.get(player.getUuid(), CooldownType.PEN);
         if (cooldown == 0) {
-            penShoot(player, 3.0F, 8, false, false, 2);
+            penShoot(player, 3.0F, 8, false, 2);
             PlayerSound.onlyPlay(player, SoundEvents.BLOCK_CHERRY_SAPLING_BREAK, 0.3f, 0.3f);
             CooldownManager.set(player.getUuid(), CooldownType.PEN, 4);
             PlayerActionBar.showCD(player, chargeCooldown);

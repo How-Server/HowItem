@@ -94,7 +94,7 @@ public class HowItemInitializer implements ModInitializer {
 
             targetItem.safeUse(player, hand);
 
-            if (ClaimCheck.useItem(player, hand)) {
+            if (ClaimCheck.attackEntity(player)) {
                 return ActionResult.FAIL;
             }
 

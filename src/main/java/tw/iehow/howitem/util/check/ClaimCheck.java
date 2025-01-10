@@ -21,6 +21,11 @@ public class ClaimCheck {
         }
         return (entity instanceof PlayerEntity) && claim.isPresent() && !claim.get().checkAction(null, Flags.PVP);
     }
+    public static boolean attackEntity(PlayerEntity player){
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
+
+        return claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.DAMAGE_ENTITY);
+    }
     public static boolean useEntity(PlayerEntity player, Entity entity){
         Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
         return claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.INTERACT_ENTITY, Node.registry(Registries.ENTITY_TYPE, entity.getType()));
