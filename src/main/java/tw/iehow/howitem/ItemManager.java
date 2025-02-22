@@ -34,6 +34,7 @@ public class ItemManager {
                 new SakuraKatana(),
                 new HowStick(),
                 new Snowman(),
+                new HowWand(),
         };
         for (BaseHowItem item : items) {
             itemMap.put(item.getHash(), item);
