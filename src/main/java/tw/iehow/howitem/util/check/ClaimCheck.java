@@ -26,6 +26,11 @@ public class ClaimCheck {
 
         return claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.DAMAGE_ENTITY);
     }
+    public static boolean interactEntity(PlayerEntity player){
+        Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
+
+        return claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.INTERACT_ENTITY);
+    }
     public static boolean useEntity(PlayerEntity player, Entity entity){
         Optional<AbstractClaim> claim = ClaimList.getClaimAt(player.getWorld(), player.getSteppingPos());
         return claim.isPresent() && !claim.get().checkAction(player.getUuid(), Flags.INTERACT_ENTITY, Node.registry(Registries.ENTITY_TYPE, entity.getType()));

@@ -5,6 +5,9 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -28,12 +31,10 @@ import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
+import tw.iehow.howitem.util.check.ClaimCheck;
 import tw.iehow.howitem.util.check.DimensionCheck;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static tw.iehow.howitem.util.check.SlotCheck.isValid;
@@ -57,6 +58,7 @@ public abstract class HandHeldEffect {
         ItemStack hand = ((PlayerEntity)(Object)this).getStackInHand(Hand.MAIN_HAND);
         ItemStack head = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD);
         ItemStack chest = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack leg = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.LEGS);
         //Timestamp for CD
         UUID playerUuid = player.getUuid();
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
@@ -227,6 +229,22 @@ public abstract class HandHeldEffect {
         //HowItem:sweater
         if (isValid(chest, Items.NETHERITE_CHESTPLATE, Identifier.of("minecraft:sweater_how"))){
             PotionEffect.add(player, StatusEffects.HASTE, 10, 1);
+        }
+
+        //HowItem:red_pants
+        if (isValid(leg, Items.NETHERITE_LEGGINGS, Identifier.of("minecraft:how_red_pants"))){
+            if (ClaimCheck.interactEntity(player)) return;
+            List<LivingEntity> passiveEntities = ((ServerPlayerEntity) player).getServerWorld().getEntitiesByClass(LivingEntity.class,
+                    player.getBoundingBox().expand(16), entity -> entity instanceof PassiveEntity
+            );
+            for (LivingEntity entity : passiveEntities) {
+                if (entity instanceof TameableEntity tameable && (tameable.isTamed() && tameable.getOwner() != player)) continue;
+                if (entity.isSilent()) continue;
+                if (entity instanceof MobEntity mob) {
+                    mob.getNavigation().startMovingTo(player, 1.314);
+                    PlayerParticle.show(entity, ParticleTypes.HEART, entity.getX(), entity.getY() + 0.8, entity.getZ(), 1.0F, 1.0F, 1.0F, 0.001f, 1);
+                }
+            }
         }
     }
 
