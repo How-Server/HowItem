@@ -6,6 +6,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AxolotlEntity;
+import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -48,8 +50,13 @@ public abstract class HandHeldEffect {
     @Unique
     private final Map<UUID, Long> cooldown = new HashMap<>();
 
+    @Unique
+    private int tickCounter = 0;
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo info) {
+        tickCounter++;
+        if (tickCounter % 4 != 0) return;
         Random random = new Random();
         //Get player info
         PlayerEntity player = ((PlayerEntity)(Object)this);
@@ -144,8 +151,8 @@ public abstract class HandHeldEffect {
         //HowItem:how_hat
         if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337030)
         || isValid(head, Items.SKULL_BANNER_PATTERN, 1337037)){
-            PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 3.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
-            PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.2, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 1);
+            PlayerParticle.show(serverPlayer, ParticleTypes.SNOWFLAKE, player.getX(), player.getY() + 3.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 4);
+            PlayerParticle.show(serverPlayer, ParticleTypes.ITEM_SNOWBALL, player.getX(), player.getY() + 0.2, player.getZ(), 0.8F, 0.5F, 0.8F, 0.01f, 2);
         }
 
         //HowItem:dragon_head
@@ -159,7 +166,7 @@ public abstract class HandHeldEffect {
             if (player.getSteppingBlockState().getBlock().equals(Blocks.LAVA)){
                 PotionEffect.add(player, StatusEffects.FIRE_RESISTANCE, 10, 1);
                 PotionEffect.add(player, StatusEffects.STRENGTH, 10, 2);
-                PlayerParticle.show(serverPlayer, ParticleTypes.FLAME, player.getX(), player.getY() + 2.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 2);
+                PlayerParticle.show(serverPlayer, ParticleTypes.FLAME, player.getX(), player.getY() + 2.0, player.getZ(), 1.6F, 1.0F, 1.6F, 0.01f, 4);
             }
             if(player.getSteppingBlockState().getBlock().equals(Blocks.WATER)){
                 PotionEffect.add(player, StatusEffects.POISON,10, 4);
@@ -173,7 +180,7 @@ public abstract class HandHeldEffect {
             }
             if ((player.getSteppingBlockState().getBlock().equals(Blocks.AIR) || player.getSteppingBlockState().getBlock().equals(Blocks.LIGHT))
             && player.hasStatusEffect(StatusEffects.JUMP_BOOST) && !player.getAbilities().flying){
-                PlayerParticle.show(serverPlayer, ParticleTypes.GUST, player.getX(), player.getY() + 0.8 ,player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 1);
+                PlayerParticle.show(serverPlayer, ParticleTypes.GUST, player.getX(), player.getY() + 0.8 ,player.getZ(), 1.6F, 1.0F, 1.6F, 0.001f, 2);
             }
         }
         //HowItem:clown
@@ -205,7 +212,7 @@ public abstract class HandHeldEffect {
         }
         //HowItem:chocolate_box
         if (isValid(offHand, Items.SKULL_BANNER_PATTERN, 1337029)){
-            PlayerParticle.show(serverPlayer, ParticleTypes.CHERRY_LEAVES, player.getX(), player.getY() + 2.0, player.getZ(), 1.5F, 0.5F, 1.5F, 1, 2);
+            PlayerParticle.show(serverPlayer, ParticleTypes.CHERRY_LEAVES, player.getX(), player.getY() + 2.0, player.getZ(), 1.5F, 0.5F, 1.5F, 1, 4);
         }
         //HowItem:howbrella(opened)
         if (isValid(offHand, Items.CROSSBOW, 1337002)){
@@ -238,12 +245,15 @@ public abstract class HandHeldEffect {
                     player.getBoundingBox().expand(16), entity -> entity instanceof PassiveEntity
             );
             for (LivingEntity entity : passiveEntities) {
-                if (entity instanceof TameableEntity tameable && (tameable.isTamed() && tameable.getOwner() != player)) continue;
-                if (entity.isSilent()) continue;
+                if (entity instanceof TameableEntity tameable && ((tameable.isTamed() && tameable.getOwner() != player) || tameable.isSitting())) continue;
+                if (entity.isSilent() || entity.isSleeping()) continue;
+
                 if (entity instanceof MobEntity mob) {
-                    mob.getNavigation().startMovingTo(player, 1.314);
-                    PlayerParticle.show(entity, ParticleTypes.HEART, entity.getX(), entity.getY() + 0.8, entity.getZ(), 1.0F, 1.0F, 1.0F, 0.001f, 1);
+                    if (mob instanceof MerchantEntity || mob instanceof AxolotlEntity) {
+                        mob.getNavigation().startMovingTo(player, 0.5);
+                    }else mob.getNavigation().startMovingTo(player, 1.2);
                 }
+                if (random.nextInt(100) > 70) PlayerParticle.show(entity, ParticleTypes.HEART, entity.getX(), entity.getY() + 0.8, entity.getZ(), 0.5F, 0.5F, 0.5F, 0.001f, 1);
             }
         }
     }
