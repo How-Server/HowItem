@@ -21,6 +21,19 @@ public class SlotCheck {
         }
         return false;
     }
+    public static boolean isValid(ItemStack stack, Item item, int minCMD, int maxCMD) {
+        if (stack.isEmpty() || stack.getItem() != item) {
+            return false;
+        }
+
+        if (!stack.getComponents().contains(DataComponentTypes.CUSTOM_MODEL_DATA)) {
+            return false;
+        }
+
+        float customModelData = stack.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA).floats().getFirst();
+        return customModelData >= minCMD && customModelData <= maxCMD;
+    }
+
     public static boolean isValid(ItemStack stack, Item item, Identifier itemModel) {
         if (!stack.isEmpty()) {
 
