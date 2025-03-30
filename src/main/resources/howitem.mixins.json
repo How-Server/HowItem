@@ -8,7 +8,8 @@
     "GoatHorn",
     "HandHeldEffect",
     "PlayerDeath",
-    "VillagerTrade"
+    "VillagerTrade",
+    "WhileUsing"
   ],
   "injectors": {
     "defaultRequire": 1
