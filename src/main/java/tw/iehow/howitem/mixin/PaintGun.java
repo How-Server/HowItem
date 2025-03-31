@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
+import tw.iehow.howitem.util.apply.PotionEffect;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -59,6 +61,7 @@ public abstract class PaintGun {
                 ItemStack offHandStack = user.getStackInHand(Hand.OFF_HAND);
 
                 if (offHandStack.getItem() instanceof DyeItem dyeItem) {
+                    PotionEffect.add(user, StatusEffects.SPEED, 1, 5);
                     int color = dyeItem.getColor().getFireworkColor();
                     float cmd = dyeItem.getColor().getId() + 1337045.0f;
                     stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(cmd), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
