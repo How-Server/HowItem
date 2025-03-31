@@ -7,6 +7,7 @@ import me.drex.itsours.claim.list.ClaimList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.entity.LivingEntity;
@@ -42,7 +43,7 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 @Mixin(Item.class)
 public abstract class PaintGun {
     private static final List<String> dyeableBlocks = List.of(
-        "wool", "carpet" , "terracotta", "concrete", "stained_glass", "shulker_box", "_bed"
+        "wool", "carpet" , "terracotta", "concrete", "stained_glass", "shulker_box"
     );
 
     private static final List<String> dyeColors = List.of(
@@ -90,7 +91,7 @@ public abstract class PaintGun {
 
                                 String[] splitName = lastPart.split("_");
                                 String newBlockName;
-
+                                if (blockState.getBlock() instanceof PaneBlock) break;
                                 if (splitName.length > 1 && isDyeColor(splitName[0])) {
                                     newBlockName = dyeItem.getColor().asString() + "_" + String.join("_", Arrays.copyOfRange(splitName, 1, splitName.length));
                                 } else if (splitName.length > 2 && isDyeColor(splitName[0] + "_" +splitName[1])) {
