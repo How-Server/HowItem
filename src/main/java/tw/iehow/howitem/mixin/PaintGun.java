@@ -43,7 +43,7 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 @Mixin(Item.class)
 public abstract class PaintGun {
     private static final List<String> dyeableBlocks = List.of(
-        "wool", "carpet" , "terracotta", "concrete", "stained_glass", "shulker_box"
+        "wool", "carpet" , "terracotta", "concrete", "glass","stained_glass", "shulker_box"
     );
 
     private static final List<String> dyeColors = List.of(
@@ -92,12 +92,17 @@ public abstract class PaintGun {
                                 String[] splitName = lastPart.split("_");
                                 String newBlockName;
                                 if (blockState.getBlock() instanceof PaneBlock) break;
-                                if (splitName.length > 1 && isDyeColor(splitName[0])) {
-                                    newBlockName = dyeItem.getColor().asString() + "_" + String.join("_", Arrays.copyOfRange(splitName, 1, splitName.length));
-                                } else if (splitName.length > 2 && isDyeColor(splitName[0] + "_" +splitName[1])) {
-                                    newBlockName = dyeItem.getColor().asString() + "_" + String.join("_", Arrays.copyOfRange(splitName, 2, splitName.length));
+
+                                if (lastPart.equals("glass")) {
+                                    newBlockName = dyeItem.getColor().asString() + "_stained_glass";
                                 } else {
-                                    newBlockName = dyeItem.getColor().asString() + "_" + lastPart;
+                                    if (splitName.length > 1 && isDyeColor(splitName[0])) {
+                                        newBlockName = dyeItem.getColor().asString() + "_" + String.join("_", Arrays.copyOfRange(splitName, 1, splitName.length));
+                                    } else if (splitName.length > 2 && isDyeColor(splitName[0] + "_" +splitName[1])) {
+                                        newBlockName = dyeItem.getColor().asString() + "_" + String.join("_", Arrays.copyOfRange(splitName, 2, splitName.length));
+                                    } else {
+                                        newBlockName = dyeItem.getColor().asString() + "_" + lastPart;
+                                    }
                                 }
 
                                 Block newBlock = Registries.BLOCK.get(Identifier.of("minecraft", newBlockName));
