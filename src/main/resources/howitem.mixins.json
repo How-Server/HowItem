@@ -9,7 +9,7 @@
     "HandHeldEffect",
     "PlayerDeath",
     "VillagerTrade",
-    "WhileUsing"
+    "PaintGun"
   ],
   "injectors": {
     "defaultRequire": 1
