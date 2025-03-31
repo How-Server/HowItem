@@ -26,6 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -42,15 +43,18 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(Item.class)
 public abstract class PaintGun {
+    @Unique
     private static final List<String> dyeableBlocks = List.of(
         "wool", "carpet" , "terracotta", "concrete", "glass","stained_glass", "shulker_box"
     );
 
+    @Unique
     private static final List<String> dyeColors = List.of(
             "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
             "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
     );
 
+    @Unique
     private static boolean isDyeColor(String color) {
         return dyeColors.contains(color);
     }
@@ -82,7 +86,7 @@ public abstract class PaintGun {
 
                         if (dyeableBlocks.stream().anyMatch(name -> blockState.getBlock().toString().contains(name))) {
                             Optional<AbstractClaim> claim = ClaimList.getClaimAt(world, blockPos);
-                            if (claim.isPresent() && !claim.get().checkAction(user.getUuid(), Flags.PLACE, Node.registry(Registries.BLOCK, blockState.getBlock())));
+                            if (claim.isPresent() && !claim.get().checkAction(user.getUuid(), Flags.PLACE, Node.registry(Registries.BLOCK, blockState.getBlock()))) break;
                             String blockName = blockState.getBlock().getTranslationKey();
                             String[] nameParts = blockName.split("\\.");
 
