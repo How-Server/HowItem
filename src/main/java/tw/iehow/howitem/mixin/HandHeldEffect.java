@@ -144,7 +144,7 @@ public abstract class HandHeldEffect {
                 if (distanceToSurface <= 3.0) {
                     PotionEffect.add(player, StatusEffects.SLOW_FALLING, 5, 1);
                     PlayerParticle.show(serverPlayer, ParticleTypes.SPLASH, player.getX(), player.getY(), player.getZ(), 1.6F, 0.8F, 1.6F, 0.4F, 240);
-                    PlayerSound.play(serverPlayer, SoundEvents.ITEM_BUCKET_FILL, 1.0F, 2.0F - (player.fallDistance / 16.0F) * 0.2F);
+                    PlayerSound.play(serverPlayer, SoundEvents.ITEM_BUCKET_FILL, 1.0F, (float) (2.0F - (player.fallDistance / 16.0F) * 0.2F));
                 }
             }
         }

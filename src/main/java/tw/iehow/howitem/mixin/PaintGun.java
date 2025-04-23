@@ -4,10 +4,9 @@ import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.flags.Flags;
 import me.drex.itsours.claim.flags.node.Node;
 import me.drex.itsours.claim.list.ClaimList;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PaneBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.entity.LivingEntity;
@@ -68,7 +67,7 @@ public abstract class PaintGun {
                 if (offHandStack.getItem() instanceof DyeItem dyeItem) {
                     PotionEffect.add(user, StatusEffects.SPEED, 1, 5);
                     int color = dyeItem.getColor().getFireworkColor();
-                    float cmd = dyeItem.getColor().getId() + 1337045.0f;
+                    float cmd = Float.parseFloat(dyeItem.getColor().getId() + 1337045.0f);
                     stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(cmd), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                     Vec3d direction = user.getRotationVector();
                     for (int i = 0; i < 8; i++) {
@@ -86,7 +85,8 @@ public abstract class PaintGun {
 
                         if (dyeableBlocks.stream().anyMatch(name -> blockState.getBlock().toString().contains(name))) {
                             Optional<AbstractClaim> claim = ClaimList.getClaimAt(world, blockPos);
-                            if (claim.isPresent() && !claim.get().checkAction(user.getUuid(), Flags.PLACE, Node.registry(Registries.BLOCK, blockState.getBlock()))) break;
+                            if (claim.isPresent() && !claim.get().checkAction(user.getUuid(), Flags.PLACE, Node.registry(Registries.BLOCK, blockState.getBlock()))
+                            && !claim.get().getFullName().equals("spawn.play")) break;
                             String blockName = blockState.getBlock().getTranslationKey();
                             String[] nameParts = blockName.split("\\.");
 
@@ -96,6 +96,12 @@ public abstract class PaintGun {
                                 String[] splitName = lastPart.split("_");
                                 String newBlockName;
                                 if (blockState.getBlock() instanceof PaneBlock) break;
+                                if (blockState.getBlock() instanceof ShulkerBoxBlock) {
+                                    BlockEntity blockEntity = world.getBlockEntity(blockPos);
+                                    if (blockEntity instanceof ShulkerBoxBlockEntity shulkerBox) {
+                                        if (!shulkerBox.isEmpty()) break;
+                                    }
+                                }
 
                                 if (lastPart.equals("glass")) {
                                     newBlockName = dyeItem.getColor().asString() + "_stained_glass";
