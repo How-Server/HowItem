@@ -4,12 +4,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CrossBow",
-    "FinishingUsing",
+    "FinishingEating",
     "GoatHorn",
     "HandHeldEffect",
+    "HowChicken",
+    "PaintGun",
     "PlayerDeath",
-    "VillagerTrade",
-    "PaintGun"
+    "VillagerTrade"
   ],
   "injectors": {
     "defaultRequire": 1
