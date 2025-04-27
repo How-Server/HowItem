@@ -32,12 +32,11 @@ public abstract class FinishingEating {
 
     @Inject(method = "finishUsing", at = @At("HEAD"))
     public void afterUse(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) throws CommandSyntaxException {
-        PlayerEntity playerEntity = (PlayerEntity) user;
-
         // used_bottle
         if(isValid(stack, Items.APPLE, 1337001)
                 || isValid(stack, Items.GOLDEN_APPLE, 1337010)
                 || isValid(stack, Items.GOLDEN_CARROT, 1337004)) {
+            PlayerEntity playerEntity = (PlayerEntity) user;
             ItemEntity item = playerEntity.dropItem(PlasticBottle.usedBottle(), true);
             Objects.requireNonNull(item).setPickupDelay(0);
         }
