@@ -5,6 +5,7 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.MerchantEntity;
@@ -247,6 +248,7 @@ public abstract class HandHeldEffect {
             for (LivingEntity entity : passiveEntities) {
                 if (entity instanceof TameableEntity tameable && ((tameable.isTamed() && tameable.getOwner() != player) || tameable.isSitting())) continue;
                 if (entity.isSilent() || entity.isSleeping()) continue;
+                if (entity instanceof HoglinEntity) continue;
 
                 if (entity instanceof MobEntity mob) {
                     if (mob instanceof MerchantEntity || mob instanceof AxolotlEntity) {
