@@ -38,11 +38,7 @@ public abstract class PlayerDeath {
         long interval = currentTime - lastUsedTime;
         //HowItem:totem
         if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 2)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 3)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 4)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 5)){
+        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1, 20)){
             if (interval > 300){
                 player.setHealth(1.0f);
                 ci.cancel();
@@ -52,12 +48,7 @@ public abstract class PlayerDeath {
                 PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
                 cooldown.put(playerUuid, currentTime);
             }
-        } else if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031)
-                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337032)
-                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337033)
-                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337034)
-                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337035)
-                || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337036)){
+        } else if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031, 1337036)){
             if (interval > 1200){
                 player.setHealth(1.0f);
                 ci.cancel();
