@@ -11,13 +11,13 @@ import net.minecraft.sound.SoundEvent;
 public class PlayerSound {
     public static void play(ServerPlayerEntity player, SoundEvent soundEvent, float volume, float pitch) {
         PlaySoundS2CPacket packet = new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(soundEvent), SoundCategory.PLAYERS, player.getX(), player.getY(), player.getZ(), volume, pitch, player.getRandom().nextLong());
-        player.getServerWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
+        player.getWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
     }
 
     public static void play(PlayerEntity player, SoundEvent soundEvent, float volume, float pitch) {
         PlaySoundS2CPacket packet = new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(soundEvent), SoundCategory.PLAYERS, player.getX(), player.getY(), player.getZ(), volume, pitch, player.getRandom().nextLong());
         ServerPlayerEntity serverPlayer1 = (ServerPlayerEntity) player;
-        serverPlayer1.getServerWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
+        serverPlayer1.getWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
     }
     public static void onlyPlay(PlayerEntity player, SoundEvent soundEvent, float volume, float pitch) {
         PlaySoundS2CPacket packet = new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(soundEvent), SoundCategory.PLAYERS, player.getX(), player.getY(), player.getZ(), volume, pitch, player.getRandom().nextLong());

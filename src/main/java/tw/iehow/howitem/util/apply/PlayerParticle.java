@@ -12,7 +12,7 @@ public class PlayerParticle {
     public static void show(ServerPlayerEntity player, ParticleEffect particleType, double x, double y, double z, float offsetX, float offsetY, float offsetZ, float speed, int count) {
         if (!player.isSpectator()){
             ParticleS2CPacket packet = new ParticleS2CPacket(particleType, false, false,x, y, z, offsetX, offsetY, offsetZ, speed, count);
-            player.getServerWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
+            player.getWorld().getPlayers().forEach((serverPlayer) -> sendPacket(serverPlayer, player, packet));
         }
     }
 
@@ -20,7 +20,7 @@ public class PlayerParticle {
         if (!player.isSpectator()){
             ParticleS2CPacket packet = new ParticleS2CPacket(particleType, false, false, x, y, z, offsetX, offsetY, offsetZ, speed, count);
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-            serverPlayer.getServerWorld().getPlayers().forEach((serverPlayer1) -> sendPacket(serverPlayer1, player, packet));
+            serverPlayer.getWorld().getPlayers().forEach((serverPlayer1) -> sendPacket(serverPlayer1, player, packet));
         }
     }
 

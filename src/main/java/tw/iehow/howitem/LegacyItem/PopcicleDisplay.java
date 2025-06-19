@@ -3,6 +3,7 @@ package tw.iehow.howitem.LegacyItem;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.component.type.LoreComponent;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Style;
@@ -34,7 +35,6 @@ public class PopcicleDisplay {
                 Text.literal(""),
                 Text.literal("「主手使用」即可再來一根。").setStyle(Style.EMPTY.withColor(Formatting.YELLOW).withItalic(false))));
         stack.set(DataComponentTypes.LORE, new LoreComponent(lore));
-        stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE);
         return stack;
     }
     public static ItemStack how_popcicle(){
@@ -81,7 +81,6 @@ public class PopcicleDisplay {
                 Text.literal("「主手食用」即可放大自己！").setStyle(Style.EMPTY.withColor(Formatting.YELLOW).withItalic(false))));
         stack.set(DataComponentTypes.CUSTOM_NAME, name);
         stack.set(DataComponentTypes.LORE, new LoreComponent(lore));
-        stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE);
         return stack;
     }
 }

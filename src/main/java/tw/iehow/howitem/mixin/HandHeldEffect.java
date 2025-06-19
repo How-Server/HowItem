@@ -158,7 +158,7 @@ public abstract class HandHeldEffect {
 
         //HowItem:dragon_head
         if (isValid(head, Items.FLOWER_BANNER_PATTERN, 1337037)){
-            for (ServerPlayerEntity player1 : serverPlayer.server.getPlayerManager().getPlayerList()){
+            for (ServerPlayerEntity player1 : serverPlayer.getServer().getPlayerManager().getPlayerList()){
                 if (player1.distanceTo(player) < 24.0){
                     PotionEffect.add(player1, StatusEffects.LUCK, 10, 0);
                     PotionEffect.add(player1, StatusEffects.REGENERATION, 10, 0);
@@ -242,7 +242,7 @@ public abstract class HandHeldEffect {
         //HowItem:red_pants
         if (isValid(leg, Items.NETHERITE_LEGGINGS, Identifier.of("minecraft:how_red_pants"))){
             if (ClaimCheck.interactEntity(player)) return;
-            List<LivingEntity> passiveEntities = ((ServerPlayerEntity) player).getServerWorld().getEntitiesByClass(LivingEntity.class,
+            List<LivingEntity> passiveEntities = ((ServerPlayerEntity) player).getWorld().getEntitiesByClass(LivingEntity.class,
                     player.getBoundingBox().expand(16), entity -> entity instanceof PassiveEntity
             );
             for (LivingEntity entity : passiveEntities) {

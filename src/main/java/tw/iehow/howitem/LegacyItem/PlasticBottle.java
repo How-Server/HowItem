@@ -28,10 +28,9 @@ public class PlasticBottle {
                 Text.literal("PET瓶胚").setStyle(Style.EMPTY.withColor(Formatting.DARK_GREEN).withItalic(false)),
                 Text.literal(""),
                 Text.literal("「可重複使用。」").setStyle(Style.EMPTY.withColor(Formatting.BLUE).withItalic(false))));
-        NbtCompound nbt = StringNbtReader.parse("{Tags:[\"BBTCup:1\"]}");
+        NbtCompound nbt = StringNbtReader.readCompound("{Tags:[\"BBTCup:1\"]}");
         stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
         stack.set(DataComponentTypes.LORE, new LoreComponent(lore));
-        stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE);
         return stack;
     }
 }
