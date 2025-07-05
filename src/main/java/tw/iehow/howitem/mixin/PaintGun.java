@@ -67,7 +67,7 @@ public abstract class PaintGun {
                 if (offHandStack.getItem() instanceof DyeItem dyeItem) {
                     PotionEffect.add(user, StatusEffects.SPEED, 1, 5);
                     int color = dyeItem.getColor().getFireworkColor();
-                    float cmd = Float.parseFloat(dyeItem.getColor().getId() + 1337045.0f);
+                    float cmd = dyeItem.getColor().getIndex() + 1337045.0f;
                     stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(cmd), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
                     Vec3d direction = user.getRotationVector();
                     for (int i = 0; i < 8; i++) {
