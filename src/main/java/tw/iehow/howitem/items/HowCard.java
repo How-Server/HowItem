@@ -2,6 +2,7 @@ package tw.iehow.howitem.items;
 
 import com.gmail.sneakdevs.diamondeconomy.DiamondUtils;
 import com.gmail.sneakdevs.diamondeconomy.sql.DatabaseManager;
+import com.gmail.sneakdevs.diamondeconomy.sql.TransactionType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,10 +32,10 @@ public class HowCard extends BaseHowItem {
 
         int money = dm.getBalanceFromUUID(player.getUuid().toString());
         if (money > 0) {
-            dm.changeBalance(player.getUuid().toString(), -1);
+            dm.changeBalance(player.getUuid().toString(), TransactionType.EXPENSE, -1, "How黑卡 - 支付給 " + entity.getDisplayName());
             PlayerActionBar.showText((ServerPlayerEntity) player, "您賞了 " + entity.getDisplayName().getString() + " 1 塊", Formatting.YELLOW);
             PotionEffect.add(player, StatusEffects.GLOWING, 200, 1);
-            dm.changeBalance(entity.getUuid().toString(), 1);
+            dm.changeBalance(entity.getUuid().toString(), TransactionType.INCOME, 1, "How黑卡 - 收到來自 " + player.getDisplayName() + " 的賞金");
             PlayerActionBar.showText((ServerPlayerEntity) entity, player.getDisplayName().getString() + " 有錢人賞了你 1 塊", Formatting.GREEN);
             PlayerSound.play((ServerPlayerEntity) player, SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
         } else {
