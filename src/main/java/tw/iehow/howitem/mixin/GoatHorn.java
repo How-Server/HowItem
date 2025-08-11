@@ -16,10 +16,13 @@ import tw.iehow.howitem.util.apply.PlayerSound;
 
 @Mixin(GoatHornItem.class)
 public abstract class GoatHorn {
+    // we remove the sound of default goat horn (mediv), and play a custom sound for WarHorn
+    // this is a fallback sound that the default goat horn is not overridden by the custom model data
     @Inject(method = "use", at = @At("HEAD"))
     public void useHorn(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (user.getStackInHand(hand).get(DataComponentTypes.CUSTOM_MODEL_DATA) == null
-        && user.getStackInHand(hand).get(DataComponentTypes.INSTRUMENT) == null) {
+        && user.getStackInHand(hand).get(DataComponentTypes.INSTRUMENT).instrument().getKey().get().getValue().toString().equals("minecraft:ponder_goat_horn")
+        ) {
             PlayerSound.play(user, SoundEvent.of(Identifier.of("minecraft:item.goat_horn.sound.call")), 1.0f, 1.0f);
         }
     }
