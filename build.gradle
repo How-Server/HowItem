@@ -37,7 +37,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation include("eu.pb4:placeholder-api:2.4.0+1.21")
 
-	modImplementation files('dependencies/ItsOurs-1.5.0+1.21.2-pre2.jar')
+	modImplementation files('dependencies/ItsOurs-1.5.1+1.21.6.jar')
 	modImplementation files('dependencies/diamondeconomy-3.0.0+1.21.7.jar')
 	compileOnly 'net.luckperms:api:5.4'
 }
