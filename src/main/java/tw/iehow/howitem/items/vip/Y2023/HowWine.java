@@ -23,7 +23,7 @@ public class HowWine extends BaseHowItem {
 
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-        long cooldown = CooldownManager.get(player.getUuid(), CooldownType.SWORD);
+        long cooldown = CooldownManager.get(player.getUuid(), CooldownType.TOY);
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
             return;
@@ -33,6 +33,6 @@ public class HowWine extends BaseHowItem {
         PotionEffect.add(livingEntity, StatusEffects.SLOW_FALLING, 120, 1);
         PotionEffect.add(livingEntity, StatusEffects.LEVITATION, 60, 1);
         PlayerParticle.show(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
-        CooldownManager.set(player.getUuid(), CooldownType.SWORD, 120);
+        CooldownManager.set(player.getUuid(), CooldownType.TOY, 120);
     }
 }
