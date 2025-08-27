@@ -18,10 +18,8 @@ import tw.iehow.howitem.items.vip.Y2023.*;
 import tw.iehow.howitem.items.vip.Y2024.*;
 import tw.iehow.howitem.items.vip.Y2025.HowPants;
 
-import java.util.*;
-
 @Mixin(PlayerEntity.class)
-public abstract class HandHeldEffect {
+public abstract class TickItem {
     @Unique
     private int tickCounter = 0;
 
