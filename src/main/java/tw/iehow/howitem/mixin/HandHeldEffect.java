@@ -184,7 +184,7 @@ public abstract class HandHeldEffect {
             }
         }
         //HowItem:clown
-        if (SlotCheck.isValid(head, Items.SKULL_BANNER_PATTERN, 1337021) && DimensionCheck.isSurvival(player)){
+        if (SlotCheck.isValid(head, Items.SKULL_BANNER_PATTERN, 1337021) && DimensionCheck.isVanillaWorld(player)){
             if (SlotCheck.isValid(offHand,  Items.FLOWER_BANNER_PATTERN, 1337016)){
                 PotionEffect.add(player, StatusEffects.LEVITATION,10,0);
             }
