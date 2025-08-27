@@ -22,7 +22,7 @@ public class HowDrum extends BaseHowItem {
 
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-        long cooldown = CooldownManager.get(player.getUuid(), CooldownType.TOY);
+        long cooldown = CooldownManager.get(player.getUuid(), CooldownType.SWORD);
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
             return;
@@ -31,6 +31,6 @@ public class HowDrum extends BaseHowItem {
         PlayerSound.play(serverPlayer, SoundEvents.ENTITY_WARDEN_SONIC_BOOM, 1.0F, 1.0F);
         PlayerParticle.show(serverPlayer, ParticleTypes.SONIC_BOOM, player.getX(), player.getY() + 0.2, player.getZ(), 1.6F, 0.8F, 1.6F, 0.1F, 10);
         PlayerParticle.show(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
-        CooldownManager.set(player.getUuid(), CooldownType.TOY, 120);
+        CooldownManager.set(player.getUuid(), CooldownType.SWORD, 120);
     }
 }
