@@ -1,6 +1,5 @@
 package tw.iehow.howitem.mixin;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.list.ClaimList;
 import net.luckperms.api.LuckPermsProvider;
@@ -27,7 +26,7 @@ import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 public abstract class FinishingEating {
 
     @Inject(method = "finishUsing", at = @At("HEAD"))
-    public void afterUse(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
+    public void lobster(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
             User user1 = LuckPermsProvider.get().getUserManager().getUser(user.getUuid());
             long expiryDuration = 0;
