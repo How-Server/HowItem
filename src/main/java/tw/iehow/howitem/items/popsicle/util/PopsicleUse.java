@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items.popsicle;
+package tw.iehow.howitem.items.popsicle.util;
 
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
