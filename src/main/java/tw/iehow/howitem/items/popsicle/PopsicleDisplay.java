@@ -1,24 +1,22 @@
-package tw.iehow.howitem.LegacyItem;
+package tw.iehow.howitem.items.popsicle;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.component.type.LoreComponent;
-import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Unit;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class PopcicleDisplay {
-    public static ItemStack how_popcicle_stick(){
+public class PopsicleDisplay {
+    public static ItemStack how_popsicle_stick(){
         ItemStack stack = Items.MOJANG_BANNER_PATTERN.getDefaultStack();
         stack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(Collections.singletonList(1337013.0f), Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
         stack.set(DataComponentTypes.CUSTOM_NAME, Text.literal("How").setStyle(Style.EMPTY.withColor(Formatting.GOLD).withItalic(false))
@@ -37,7 +35,7 @@ public class PopcicleDisplay {
         stack.set(DataComponentTypes.LORE, new LoreComponent(lore));
         return stack;
     }
-    public static ItemStack how_popcicle(){
+    public static ItemStack how_popsicle(){
         ItemStack stack = Items.MOJANG_BANNER_PATTERN.getDefaultStack();
         Text name = null;
         Random random = new Random();
