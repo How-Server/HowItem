@@ -1,4 +1,4 @@
-package tw.iehow.howitem.mixin;
+package tw.iehow.howitem.items;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -6,24 +6,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import tw.iehow.howitem.util.check.SlotCheck;
 
 import java.util.Random;
 
-@Mixin(LivingEntity.class)
-public abstract class HowHelmet {
-    @ModifyVariable(
-            method = "damage",
-            at = @At("HEAD"),
-            ordinal = 0,
-            argsOnly = true
-    )
-    private float modifyDamage(float amount, ServerWorld world, DamageSource source) {
-        LivingEntity self = (LivingEntity) (Object) this;
+public class HowHelmet {
+    public static float use(LivingEntity self, float amount, DamageSource source) {
         if (self instanceof PlayerEntity && SlotCheck.isValid(self.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337061)) {
             if (source.isOf(DamageTypes.MAGIC) ||
                     source.isOf(DamageTypes.DRAGON_BREATH) ||

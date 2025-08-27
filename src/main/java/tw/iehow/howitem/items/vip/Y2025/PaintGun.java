@@ -1,4 +1,4 @@
-package tw.iehow.howitem.mixin;
+package tw.iehow.howitem.items.vip.Y2025;
 
 import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.flags.Flags;
@@ -12,7 +12,6 @@ import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.DustParticleEffect;
@@ -24,43 +23,30 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
 import tw.iehow.howitem.util.check.SlotCheck;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@Mixin(Item.class)
-public abstract class PaintGun {
-    @Unique
+public class PaintGun {
     private static final List<String> dyeableBlocks = List.of(
-        "wool", "carpet" , "terracotta", "concrete", "glass","stained_glass", "shulker_box"
+            "wool", "carpet" , "terracotta", "concrete", "glass","stained_glass", "shulker_box"
     );
 
-    @Unique
     private static final List<String> dyeColors = List.of(
             "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
             "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
     );
 
-    @Unique
     private static boolean isDyeColor(String color) {
         return dyeColors.contains(color);
     }
 
-    @Inject(method = "usageTick", at = @At("HEAD"))
-    public void whileUse(World world, LivingEntity user, ItemStack stack, int remainingUseTicks, CallbackInfo ci) {
+     public static void use(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (SlotCheck.isValid(stack, Items.SKULL_BANNER_PATTERN, 1337045, 1337060)) {
-            if (remainingUseTicks < 199999960) { // 20 ticks
+            if (remainingUseTicks < 199999960) {
                 ItemStack offHandStack = user.getStackInHand(Hand.OFF_HAND);
 
                 if (offHandStack.getItem() instanceof DyeItem dyeItem) {
@@ -85,7 +71,7 @@ public abstract class PaintGun {
                         if (dyeableBlocks.stream().anyMatch(name -> blockState.getBlock().toString().contains(name))) {
                             Optional<AbstractClaim> claim = ClaimList.getClaimAt(world, blockPos);
                             if (claim.isPresent() && !claim.get().checkAction(user.getUuid(), Flags.PLACE, Node.registry(Registries.BLOCK, blockState.getBlock()))
-                            && !claim.get().getFullName().equals("spawn.play")) break;
+                                    && !claim.get().getFullName().equals("spawn.play")) break;
                             String blockName = blockState.getBlock().getTranslationKey();
                             String[] nameParts = blockName.split("\\.");
 
