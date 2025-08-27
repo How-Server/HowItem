@@ -16,11 +16,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public abstract class HowHook {
@@ -39,7 +38,7 @@ public abstract class HowHook {
 
     @Inject(method = "tryBreakBlock", at = @At("HEAD"), cancellable = true)
     private void onBreakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (!isValid(player.getMainHandStack(), Items.SKULL_BANNER_PATTERN, 1337062)) return;
+        if (!SlotCheck.isValid(player.getMainHandStack(), Items.SKULL_BANNER_PATTERN, 1337062)) return;
 
         World world = player.getWorld();
         BlockState state = world.getBlockState(pos);

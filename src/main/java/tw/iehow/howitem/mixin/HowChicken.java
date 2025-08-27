@@ -17,15 +17,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 @Mixin(Item.class)
 public abstract class HowChicken {
     @Inject(method = "usageTick", at = @At("HEAD"))
     public void whileUse(World world, LivingEntity user, ItemStack stack, int remainingUseTicks, CallbackInfo ci) {
         PlayerEntity playerEntity = user instanceof PlayerEntity ? (PlayerEntity) user : null;
-        if (isValid(stack, Items.SKULL_BANNER_PATTERN, Identifier.of("minecraft:how_chicken")) && remainingUseTicks < 50) {
+        if (SlotCheck.isValid(stack, Items.SKULL_BANNER_PATTERN, Identifier.of("minecraft:how_chicken")) && remainingUseTicks < 50) {
             playerEntity.stopUsingItem();
             playerEntity.getItemCooldownManager().set(stack, 40);
             PotionEffect.add(playerEntity, StatusEffects.SPEED, 100, 9);

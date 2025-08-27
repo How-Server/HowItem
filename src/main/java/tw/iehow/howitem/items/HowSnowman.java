@@ -8,8 +8,8 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import tw.iehow.howitem.util.apply.PlayerSound;
+import tw.iehow.howitem.util.check.SlotCheck;
 
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 public class HowSnowman extends BaseHowItem {
     public HowSnowman() {
@@ -17,10 +17,10 @@ public class HowSnowman extends BaseHowItem {
     }
 
     public void unsafeUse(PlayerEntity player, Hand hand) {
-        if (!isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337039)
-        && !isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337040)
-        && !isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337041)
-        && !isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337042)){
+        if (!SlotCheck.isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337039)
+        && !SlotCheck.isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337040)
+        && !SlotCheck.isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337041)
+        && !SlotCheck.isValid(player.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337042)){
             return;
         }
 

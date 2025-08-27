@@ -12,14 +12,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 @Mixin(CrossbowItem.class)
 public abstract class HowUmbrella {
     @Inject(method = "shootAll", at = @At("HEAD"))
     public void openUmbrella(World world, LivingEntity shooter, Hand hand, ItemStack stack, float speed, float divergence, LivingEntity target, CallbackInfo ci) {
-        if(isValid(stack, Items.CROSSBOW, 1337002)) {
+        if(SlotCheck.isValid(stack, Items.CROSSBOW, 1337002)) {
             stack.set(DataComponentTypes.CHARGED_PROJECTILES, Items.AIR.getDefaultStack().get(DataComponentTypes.CHARGED_PROJECTILES));
             ItemEntity itemEntity = new ItemEntity(shooter.getWorld(), shooter.getX(), shooter.getY(), shooter.getZ(), new ItemStack(Items.ARROW));
             itemEntity.setPickupDelay(0);

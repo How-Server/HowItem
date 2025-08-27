@@ -15,12 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerDeath {
@@ -37,8 +36,8 @@ public abstract class PlayerDeath {
         long currentTime = player.getWorld().getTime();
         long interval = currentTime - lastUsedTime;
         //HowItem:totem
-        if (isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
-        || isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1, 20)){
+        if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
+        || SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1, 20)){
             if (interval > 300){
                 player.setHealth(1.0f);
                 ci.cancel();

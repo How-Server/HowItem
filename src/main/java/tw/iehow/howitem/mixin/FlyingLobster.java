@@ -16,18 +16,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(Item.class)
 public abstract class FlyingLobster {
 
     @Inject(method = "finishUsing", at = @At("HEAD"))
     public void applyFly(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-        if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
+        if (SlotCheck.isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
             User user1 = LuckPermsProvider.get().getUserManager().getUser(user.getUuid());
             long expiryDuration = 0;
             for (Node node : user1.getNodes()) {

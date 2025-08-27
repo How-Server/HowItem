@@ -32,13 +32,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
+import tw.iehow.howitem.util.check.SlotCheck;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(Item.class)
 public abstract class PaintGun {
@@ -60,7 +59,7 @@ public abstract class PaintGun {
 
     @Inject(method = "usageTick", at = @At("HEAD"))
     public void whileUse(World world, LivingEntity user, ItemStack stack, int remainingUseTicks, CallbackInfo ci) {
-        if (isValid(stack, Items.SKULL_BANNER_PATTERN, 1337045, 1337060)) {
+        if (SlotCheck.isValid(stack, Items.SKULL_BANNER_PATTERN, 1337045, 1337060)) {
             if (remainingUseTicks < 199999960) { // 20 ticks
                 ItemStack offHandStack = user.getStackInHand(Hand.OFF_HAND);
 
