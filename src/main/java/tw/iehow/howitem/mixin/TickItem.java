@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tw.iehow.howitem.items.vip.Y2024.HowClown;
 import tw.iehow.howitem.items.omamori.BlackOmamori;
 import tw.iehow.howitem.items.omamori.BlueOmamori;
 import tw.iehow.howitem.items.omamori.PurpleOmamori;

@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items.vip.Y2025;
+package tw.iehow.howitem.items.others;
 
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;

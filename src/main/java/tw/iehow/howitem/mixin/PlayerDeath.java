@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tw.iehow.howitem.items.vip.Y2025.HowTotem;
+import tw.iehow.howitem.items.others.HowTotem;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerDeath {

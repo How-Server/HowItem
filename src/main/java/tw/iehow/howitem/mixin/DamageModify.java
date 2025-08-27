@@ -6,7 +6,7 @@ import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import tw.iehow.howitem.items.HowHelmet;
+import tw.iehow.howitem.items.vip.Y2025.HowHelmet;
 
 @Mixin(LivingEntity.class)
 public abstract class DamageModify {

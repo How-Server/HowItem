@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.horn;
 
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
 

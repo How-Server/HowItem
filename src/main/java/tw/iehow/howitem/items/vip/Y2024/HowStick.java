@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.vip.Y2024;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,6 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import tw.iehow.howitem.CooldownManager;
 import tw.iehow.howitem.enums.CooldownType;
+import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 
 public class HowStick extends BaseHowItem {

@@ -1,9 +1,14 @@
 package tw.iehow.howitem;
 
 import tw.iehow.howitem.items.*;
+import tw.iehow.howitem.items.horn.WarHorn;
+import tw.iehow.howitem.items.others.HowSnowman;
 import tw.iehow.howitem.items.pen.*;
 import tw.iehow.howitem.items.popsicle.*;
 import tw.iehow.howitem.items.sword.*;
+import tw.iehow.howitem.items.vip.Y2023.*;
+import tw.iehow.howitem.items.vip.Y2024.*;
+import tw.iehow.howitem.items.vip.Y2025.*;
 
 import java.util.HashMap;
 import java.util.Map;

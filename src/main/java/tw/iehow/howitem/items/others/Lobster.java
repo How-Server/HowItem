@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.others;
 
 import me.drex.itsours.claim.AbstractClaim;
 import me.drex.itsours.claim.list.ClaimList;

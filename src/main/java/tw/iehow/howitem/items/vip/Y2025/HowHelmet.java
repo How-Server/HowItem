@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.vip.Y2025;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

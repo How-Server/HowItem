@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.vip.Y2025;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
@@ -14,6 +14,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import tw.iehow.howitem.CooldownManager;
 import tw.iehow.howitem.enums.CooldownType;
+import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;

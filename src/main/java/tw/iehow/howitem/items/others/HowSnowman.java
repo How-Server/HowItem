@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items;
+package tw.iehow.howitem.items.others;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -7,6 +7,7 @@ import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.check.SlotCheck;
 
