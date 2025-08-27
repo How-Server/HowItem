@@ -12,51 +12,42 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tw.iehow.howitem.CooldownManager;
+import tw.iehow.howitem.enums.CooldownType;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
 import tw.iehow.howitem.util.check.SlotCheck;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerDeath {
 
-    //Log for CD
-    @Unique
-    private final Map<UUID, Long> cooldown = new HashMap<>();
-
     @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
-    public void playerDeath(DamageSource damageSource, CallbackInfo ci) {
+    public void customTotem(DamageSource damageSource, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
         UUID playerUuid = player.getUuid();
-        long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
-        long currentTime = player.getWorld().getTime();
-        long interval = currentTime - lastUsedTime;
-        //HowItem:totem
+        long cd = CooldownManager.get(playerUuid, CooldownType.TOTEM);
+        if (cd > 0) return;
         if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
         || SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1, 20)){
-            if (interval > 300){
-                player.setHealth(1.0f);
-                ci.cancel();
-                PotionEffect.add(player, StatusEffects.REGENERATION,100,2);
-                PotionEffect.add(player, StatusEffects.ABSORPTION,100,1);
-                PlayerSound.play(player, SoundEvents.ITEM_TOTEM_USE, 0.6f, 1.0f);
-                PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
-                cooldown.put(playerUuid, currentTime);
-            }
+            player.setHealth(1.0f);
+            ci.cancel();
+            applyTotem(player, 300);
         } else if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031, 1337036)){
-            if (interval > 1200){
-                player.setHealth(1.0f);
-                ci.cancel();
-                PotionEffect.add(player, StatusEffects.REGENERATION,100,2);
-                PotionEffect.add(player, StatusEffects.ABSORPTION,100,1);
-                PlayerSound.play(player, SoundEvents.ITEM_TOTEM_USE, 0.6f, 1.0f);
-                PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
-                cooldown.put(playerUuid, currentTime);
-            }
+            player.setHealth(1.0f);
+            ci.cancel();
+            applyTotem(player, 1200);
         }
+    }
+
+    @Unique
+    private void applyTotem(ServerPlayerEntity player, long cd) {
+        PotionEffect.add(player, StatusEffects.REGENERATION,100,2);
+        PotionEffect.add(player, StatusEffects.ABSORPTION,100,1);
+        PlayerSound.play(player, SoundEvents.ITEM_TOTEM_USE, 0.6f, 1.0f);
+        PlayerParticle.show(player, ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1f, 50);
+        CooldownManager.set(player.getUuid(), CooldownType.TOTEM, cd);
     }
 }
