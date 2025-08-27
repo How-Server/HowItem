@@ -30,12 +30,15 @@ public abstract class PlayerDeath {
         UUID playerUuid = player.getUuid();
         long cd = CooldownManager.get(playerUuid, CooldownType.TOTEM);
         if (cd > 0) return;
+
+        // vip totem
         if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337025)
         || SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1, 20)){
             player.setHealth(1.0f);
             ci.cancel();
             applyTotem(player, 300);
-        } else if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031, 1337036)){
+        } // admin & gold totem
+        else if (SlotCheck.isValid(player.getStackInHand(Hand.OFF_HAND),Items.SKULL_BANNER_PATTERN, 1337031, 1337036)){
             player.setHealth(1.0f);
             ci.cancel();
             applyTotem(player, 1200);
