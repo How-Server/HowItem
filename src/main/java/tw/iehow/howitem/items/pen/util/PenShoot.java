@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items.pen;
+package tw.iehow.howitem.items.pen.util;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;

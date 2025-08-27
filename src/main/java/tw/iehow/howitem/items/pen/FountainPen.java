@@ -9,6 +9,7 @@ import net.minecraft.util.Hand;
 import tw.iehow.howitem.CooldownManager;
 import tw.iehow.howitem.enums.CooldownType;
 import tw.iehow.howitem.items.BaseHowItem;
+import tw.iehow.howitem.items.pen.util.PenShoot;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerSound;
 import tw.iehow.howitem.util.apply.PotionEffect;
