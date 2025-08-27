@@ -23,10 +23,10 @@ import java.util.concurrent.TimeUnit;
 import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
 @Mixin(Item.class)
-public abstract class FinishingEating {
+public abstract class FlyingLobster {
 
     @Inject(method = "finishUsing", at = @At("HEAD"))
-    public void lobster(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
+    public void applyFly(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if (isValid(stack, Items.ENCHANTED_GOLDEN_APPLE, 1337001)) {
             User user1 = LuckPermsProvider.get().getUserManager().getUser(user.getUuid());
             long expiryDuration = 0;

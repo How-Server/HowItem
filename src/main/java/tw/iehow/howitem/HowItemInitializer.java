@@ -102,6 +102,5 @@ public class HowItemInitializer implements ModInitializer {
 
             return ActionResult.PASS;
         });
-
     }
 }

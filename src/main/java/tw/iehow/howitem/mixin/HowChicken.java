@@ -33,6 +33,5 @@ public abstract class HowChicken {
             PlayerSound.play(playerEntity, SoundEvents.ENTITY_CHICKEN_AMBIENT, 1.0f, 1.0f);
             playerEntity.getHungerManager().add(8,4);
         }
-
     }
 }

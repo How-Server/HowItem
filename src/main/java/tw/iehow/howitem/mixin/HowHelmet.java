@@ -22,7 +22,6 @@ public abstract class HowHelmet {
             ordinal = 0,
             argsOnly = true
     )
-
     private float modifyDamage(float amount, ServerWorld world, DamageSource source) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self instanceof PlayerEntity && SlotCheck.isValid(self.getEquippedStack(EquipmentSlot.HEAD), Items.SKULL_BANNER_PATTERN, 1337061)) {
@@ -34,6 +33,7 @@ public abstract class HowHelmet {
                 float reduceRate = 0.1f + new Random().nextFloat() * 0.4f;
                 return amount * (1.0f - reduceRate);
             }
-        }return amount;
+        }
+        return amount;
     }
 }
