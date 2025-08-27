@@ -4,6 +4,7 @@ public enum CooldownType {
     SWORD,
     TOY,
     TOTEM,
+    OMAMORI,
     PEN,
     PEN_CHARGED
 }

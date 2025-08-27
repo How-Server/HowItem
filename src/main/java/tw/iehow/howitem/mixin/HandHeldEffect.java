@@ -30,6 +30,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tw.iehow.howitem.items.omamori.BlackOmamori;
+import tw.iehow.howitem.items.omamori.BlueOmamori;
+import tw.iehow.howitem.items.omamori.PurpleOmamori;
+import tw.iehow.howitem.items.omamori.RedOmamori;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerParticle;
 import tw.iehow.howitem.util.apply.PlayerSound;
@@ -57,66 +61,28 @@ public abstract class HandHeldEffect {
     private void onTick(CallbackInfo info) {
         tickCounter++;
         if (tickCounter % 4 != 0) return;
+
         Random random = new Random();
         //Get player info
         PlayerEntity player = ((PlayerEntity)(Object)this);
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-        ItemStack offHand = ((PlayerEntity)(Object)this).getStackInHand(Hand.OFF_HAND);
-        ItemStack hand = ((PlayerEntity)(Object)this).getStackInHand(Hand.MAIN_HAND);
-        ItemStack head = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD);
-        ItemStack chest = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST);
-        ItemStack leg = ((PlayerEntity)(Object)this).getEquippedStack(EquipmentSlot.LEGS);
+
+        ItemStack offHand = player.getStackInHand(Hand.OFF_HAND);
+        ItemStack hand = player.getStackInHand(Hand.MAIN_HAND);
+        ItemStack head = player.getEquippedStack(EquipmentSlot.HEAD);
+        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack leg = player.getEquippedStack(EquipmentSlot.LEGS);
         //Timestamp for CD
         UUID playerUuid = player.getUuid();
         long lastUsedTime = cooldown.getOrDefault(playerUuid, 0L);
         long currentTime = player.getWorld().getTime();
         long interval = currentTime - lastUsedTime;
 
-        //Detect the usage of absorption
-        float absorptionAmount = player.getAbsorptionAmount();
-
-        //HowItem:blue_omamori
-        if (SlotCheck.isValid(offHand, Items.FLOWER_BANNER_PATTERN,1337001)) {
-            if (player.getSteppingBlockState().getBlock().equals(Blocks.WATER))
-                PotionEffect.add(player, StatusEffects.CONDUIT_POWER, 10, 1);
-            else if (!player.getSteppingBlockState().getBlock().equals(Blocks.WATER)
-            && player.getWorld().getBlockState(player.getBlockPos().add(0, 1, 0)).getBlock().equals(Blocks.WATER)){
-                PotionEffect.add(player, StatusEffects.WATER_BREATHING, 10, 1);
-                PotionEffect.add(player, StatusEffects.NIGHT_VISION, 10, 1);
-            }
-        }
-
-        //HowItem:purple_omamori
-        if (SlotCheck.isValid(offHand, Items.FLOWER_BANNER_PATTERN,1337002)) {
-            PotionEffect.remove(player, StatusEffects.HUNGER);
-            PotionEffect.remove(player, StatusEffects.DARKNESS);
-            PotionEffect.remove(player, StatusEffects.POISON);
-            PotionEffect.remove(player, StatusEffects.WITHER);
-        }
-
-        //HowItem:red_omamori
-        if (SlotCheck.isValid(offHand, Items.TOTEM_OF_UNDYING,1337001)) {
-            if (interval >= 300 && !absorptionEffect) {
-                PotionEffect.add(player, StatusEffects.ABSORPTION, -1, 3);
-                absorptionAmount = 1.0F;
-                absorptionEffect = true;
-            }else {
-                if (300 - interval >= 0){
-                    PlayerActionBar.showCD(serverPlayer, 300 - interval);
-                }
-            }
-        }
-        if (absorptionEffect && (!SlotCheck.isValid(offHand, Items.TOTEM_OF_UNDYING,1337001) || absorptionAmount == 0.0F)){
-            PotionEffect.remove(player, StatusEffects.ABSORPTION);
-            absorptionEffect = false;
-            cooldown.put(playerUuid, currentTime);
-        }
-
-        //HowItem:blue_omamori
-        if (SlotCheck.isValid(offHand, Items.SKULL_BANNER_PATTERN,1337001)) {
-            PotionEffect.add(player, StatusEffects.SLOWNESS, 25, 1);
-            PotionEffect.add(player, StatusEffects.WEAKNESS, 25, 1);
-            PotionEffect.add(player, StatusEffects.BLINDNESS, 25, 1);
+        if (offHand.get(DataComponentTypes.CUSTOM_MODEL_DATA) != null){
+            BlueOmamori.apply(player);
+            PurpleOmamori.apply(player);
+            RedOmamori.apply(player);
+            BlackOmamori.apply(player);
         }
 
         //HowItem:chinese_valentines_2023/red_rose
