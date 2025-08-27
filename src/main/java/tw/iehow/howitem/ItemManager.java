@@ -14,7 +14,7 @@ public class ItemManager {
 
     static {
         final BaseHowItem[] items = {
-                new Clown(),
+                new HowClown(),
                 new HowCard(),
                 new HowDrum(),
                 new HowWine(),
@@ -33,7 +33,7 @@ public class ItemManager {
                 new Keyboard(),
                 new SakuraKatana(),
                 new HowStick(),
-                new Snowman(),
+                new HowSnowman(),
                 new HowWand(),
         };
         for (BaseHowItem item : items) {

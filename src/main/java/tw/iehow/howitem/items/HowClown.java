@@ -11,9 +11,9 @@ import tw.iehow.howitem.enums.TriggerType;
 import tw.iehow.howitem.util.apply.PlayerActionBar;
 import tw.iehow.howitem.util.apply.PlayerSound;
 
-public class Clown extends BaseHowItem {
+public class HowClown extends BaseHowItem {
 
-    public Clown() {
+    public HowClown() {
         super(Items.SKULL_BANNER_PATTERN, 1337021);
         this.triggerTypes.remove(TriggerType.ATTACK_HAND);
         this.triggerTypes.add(TriggerType.OFF_HAND);

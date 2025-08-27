@@ -11,8 +11,8 @@ import tw.iehow.howitem.util.apply.PlayerSound;
 
 import static tw.iehow.howitem.util.check.SlotCheck.isValid;
 
-public class Snowman extends BaseHowItem {
-    public Snowman() {
+public class HowSnowman extends BaseHowItem {
+    public HowSnowman() {
         super(Items.SKULL_BANNER_PATTERN, 1337043);
     }
 
