@@ -1,4 +1,4 @@
-package tw.iehow.howitem.items.popicle;
+package tw.iehow.howitem.items.popsicle;
 
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,7 +9,7 @@ import tw.iehow.howitem.util.apply.PlayerSound;
 import static tw.iehow.howitem.LegacyItem.PopcicleDisplay.how_popcicle;
 import static tw.iehow.howitem.LegacyItem.PopcicleDisplay.how_popcicle_stick;
 
-public class PopicleUse {
+public class PopsicleUse {
     public static void apply(PlayerEntity player, Hand hand) {
         PlayerSound.onlyPlay(player, SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 1.0f, 0.94f);
         PlayerSound.play(player, SoundEvents.ENTITY_GENERIC_EAT.value(), 1.0f, 1.0f);

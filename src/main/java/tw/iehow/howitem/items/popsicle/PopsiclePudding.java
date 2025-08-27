@@ -1,17 +1,17 @@
-package tw.iehow.howitem.items.popicle;
+package tw.iehow.howitem.items.popsicle;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import tw.iehow.howitem.items.BaseHowItem;
 
-public class PopicleSoda extends BaseHowItem {
+public class PopsiclePudding extends BaseHowItem {
 
-    public PopicleSoda() {
-        super(Items.MOJANG_BANNER_PATTERN, 1337014);
+    public PopsiclePudding() {
+        super(Items.MOJANG_BANNER_PATTERN, 1337015);
     }
 
     public void safeUse(PlayerEntity player, Hand hand) {
-        PopicleUse.apply(player, hand);
+        PopsicleUse.apply(player, hand);
     }
 }

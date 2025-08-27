@@ -2,7 +2,7 @@ package tw.iehow.howitem;
 
 import tw.iehow.howitem.items.*;
 import tw.iehow.howitem.items.pen.*;
-import tw.iehow.howitem.items.popicle.*;
+import tw.iehow.howitem.items.popsicle.*;
 import tw.iehow.howitem.items.sword.*;
 
 import java.util.HashMap;
@@ -23,11 +23,11 @@ public class ItemManager {
                 new Pencil(),
                 new FountainPen(),
                 new GoldenFountainPen(),
-                new PopicleStick(),
-                new PopicleChocolate(),
-                new PopicleSoda(),
-                new PopiclePudding(),
-                new PopicleStrawberry(),
+                new PopsicleStick(),
+                new PopsicleChocolate(),
+                new PopsicleSoda(),
+                new PopsiclePudding(),
+                new PopsicleStrawberry(),
                 new BlackKatana(),
                 new BlueKatana(),
                 new Keyboard(),
