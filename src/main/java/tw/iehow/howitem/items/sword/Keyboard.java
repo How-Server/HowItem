@@ -26,10 +26,10 @@ public class Keyboard extends BaseHowItem {
             PlayerActionBar.showCD(serverPlayer, cooldown);
             return;
         }
+
         LivingEntity livingEntity = (LivingEntity) entity;
         PotionEffect.add(livingEntity, StatusEffects.NAUSEA, 150, 1);
         PotionEffect.add(livingEntity, StatusEffects.SLOWNESS, 100, 1);
         CooldownManager.set(player.getUuid(), CooldownType.SWORD, 300);
     }
-
 }

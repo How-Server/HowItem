@@ -25,17 +25,14 @@ public class SakuraKatana extends BaseHowItem {
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
         long cooldown = CooldownManager.get(player.getUuid(), CooldownType.SWORD);
-
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
             return;
         }
+
         PotionEffect.add(player, StatusEffects.REGENERATION, 60, 2);
         PotionEffect.add((LivingEntity) entity, StatusEffects.SLOWNESS, 20, 2);
         PlayerParticle.show(player, ParticleTypes.HEART, player.getX(), player.getY() + 1.0, player.getZ(), 0.5F, 0.5F, 0.5F, 1, 5);
         CooldownManager.set(player.getUuid(), CooldownType.SWORD, 120);
-
     }
-
 }
-

@@ -17,7 +17,6 @@ public class BlackKatana extends BaseHowItem {
 
 
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
-
         if (entity instanceof PlayerEntity playerEntity) {
             if (playerEntity.hasPermissionLevel(4)) return;
         }

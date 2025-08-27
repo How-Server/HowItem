@@ -30,7 +30,6 @@ public class BlueKatana extends BaseHowItem {
 
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
         long cooldown = CooldownManager.get(player.getUuid(), CooldownType.SWORD);
-
         if (cooldown > 0) {
             PlayerActionBar.showCD(serverPlayer, cooldown);
             return;
@@ -43,7 +42,5 @@ public class BlueKatana extends BaseHowItem {
         PlayerParticle.show(player, ParticleTypes.BUBBLE, player.getX(), player.getY() + 1.0, player.getZ(), 1.5F, 1.5F, 1.5F, 0.1F, 120);
         PlayerSound.onlyPlay(player, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, 1.0F, 1.0F);
         CooldownManager.set(player.getUuid(), CooldownType.SWORD, 120);
-
     }
-
 }
