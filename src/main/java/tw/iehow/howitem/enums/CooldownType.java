@@ -1,8 +1,8 @@
 package tw.iehow.howitem.enums;
 
 public enum CooldownType {
-    SWORD,
-    TOY,
+    SWORD, // for attack
+    TOY, // for fun
     TOTEM,
     OMAMORI,
     PEN,
