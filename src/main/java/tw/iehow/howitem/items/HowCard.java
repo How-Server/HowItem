@@ -43,5 +43,4 @@ public class HowCard extends BaseHowItem {
             PlayerSound.play((ServerPlayerEntity) player, SoundEvents.ENTITY_VILLAGER_NO, 1.0F, 1.0F);
         }
     }
-
 }

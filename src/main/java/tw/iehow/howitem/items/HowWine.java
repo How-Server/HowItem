@@ -34,5 +34,4 @@ public class HowWine extends BaseHowItem {
         PlayerParticle.show(serverPlayer, ParticleTypes.SOUL, player.getX(), player.getY() + 0.2, player.getZ(), 0.4F, 0.5F, 0.4F, 0.2F, 30);
         CooldownManager.set(player.getUuid(), CooldownType.SWORD, 120);
     }
-
 }
