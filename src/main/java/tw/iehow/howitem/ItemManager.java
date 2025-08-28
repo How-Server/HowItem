@@ -40,6 +40,7 @@ public class ItemManager {
                 new HowStick(),
                 new HowSnowman(),
                 new HowWand(),
+                new HowHammer(),
         };
         for (BaseHowItem item : items) {
             itemMap.put(item.getHash(), item);
