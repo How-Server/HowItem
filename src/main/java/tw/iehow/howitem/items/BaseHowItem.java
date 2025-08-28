@@ -16,7 +16,7 @@ public abstract class BaseHowItem {
 
     protected Item item;
     protected float customModelID;
-    protected boolean bypassDragonPart = false;
+    protected boolean bypassDragonPart = true;
     protected List<TriggerType> triggerTypes = new ArrayList<>();
 
     public BaseHowItem(Item item, int customModelID) {
@@ -26,14 +26,14 @@ public abstract class BaseHowItem {
     }
 
     public void beforeSafeAttack(PlayerEntity player, World world, Entity entity) {
-        if (!bypassDragonPart && entity instanceof EnderDragonPart) {
+        if (bypassDragonPart && entity instanceof EnderDragonPart) {
             return;
         }
         safeAttack(player, world, entity);
     }
 
     public void beforeUnsafeAttack(PlayerEntity player, World world, Entity entity) {
-        if (!bypassDragonPart && entity instanceof EnderDragonPart) {
+        if (bypassDragonPart && entity instanceof EnderDragonPart) {
             return;
         }
         unsafeAttack(player, world, entity);
@@ -41,10 +41,6 @@ public abstract class BaseHowItem {
 
     public int getHash() {
         return Objects.hash(this.item.toString(), this.customModelID);
-    }
-
-    public void setBypassDragonPart() {
-        this.bypassDragonPart = true;
     }
 
     public boolean canTrigger(TriggerType type) {
