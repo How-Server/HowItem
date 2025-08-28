@@ -55,20 +55,20 @@ public class HowItemInitializer implements ModInitializer {
                 }
             }
 
+            if (EntityCheck.invalidType(entity)) {
+                return ActionResult.PASS;
+            }
+
             for (BaseHowItem item : trigger) {
-                item.beforeSafeAttack(player, world, entity);
+                item.safeAttack(player, world, entity);
             }
 
             if (ClaimCheck.attackEntity(player, entity)) {
                 return ActionResult.FAIL;
             }
 
-            if (EntityCheck.entityType(entity)) {
-                return ActionResult.PASS;
-            }
-
             for (BaseHowItem item : trigger) {
-                item.beforeUnsafeAttack(player, world, entity);
+                item.unsafeAttack(player, world, entity);
             }
 
             return ActionResult.PASS;

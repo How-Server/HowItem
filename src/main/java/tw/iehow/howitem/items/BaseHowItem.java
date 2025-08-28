@@ -1,7 +1,6 @@
 package tw.iehow.howitem.items;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
@@ -16,27 +15,12 @@ public abstract class BaseHowItem {
 
     protected Item item;
     protected float customModelID;
-    protected boolean bypassDragonPart = true;
     protected List<TriggerType> triggerTypes = new ArrayList<>();
 
     public BaseHowItem(Item item, int customModelID) {
         this.item = item;
         this.customModelID = customModelID;
         this.triggerTypes.add(TriggerType.ATTACK_HAND);
-    }
-
-    public void beforeSafeAttack(PlayerEntity player, World world, Entity entity) {
-        if (bypassDragonPart && entity instanceof EnderDragonPart) {
-            return;
-        }
-        safeAttack(player, world, entity);
-    }
-
-    public void beforeUnsafeAttack(PlayerEntity player, World world, Entity entity) {
-        if (bypassDragonPart && entity instanceof EnderDragonPart) {
-            return;
-        }
-        unsafeAttack(player, world, entity);
     }
 
     public int getHash() {
