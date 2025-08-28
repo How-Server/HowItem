@@ -24,6 +24,7 @@ public class CooldownManager {
         cooldown.get(uuid).put(type, server.getTicks() + cd);
     }
 
+    // add vanilla item cooldown
     public static void set(UUID uuid, CooldownType type, long cd, PlayerEntity player, ItemStack stack) {
         ItemCooldownManager itemCooldownManager = player.getItemCooldownManager();
         itemCooldownManager.set(stack, (int) cd);
