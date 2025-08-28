@@ -19,6 +19,5 @@ public abstract class BlockBreak {
     @Inject(method = "tryBreakBlock", at = @At("HEAD"), cancellable = true)
     private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         HowHook.use(player, pos);
-        cir.setReturnValue(true);
     }
 }
