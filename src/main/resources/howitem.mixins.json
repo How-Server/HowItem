@@ -3,15 +3,17 @@
   "package": "tw.iehow.howitem.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "CrossBowShoot",
-    "FinishUsing",
-    "HornUse",
-    "TickItem",
-    "WhileUsing",
-    "DamageModify",
+    "AnvilBlocked",
     "BlockBreak",
+    "CrossBowShoot",
+    "DamageModify",
+    "FinishUsing",
+    "GrindstoneBlocked",
+    "HornUse",
     "PlayerDeath",
-    "VillagerTrade"
+    "TickItem",
+    "VillagerTrade",
+    "WhileUsing"
   ],
   "injectors": {
     "defaultRequire": 1
