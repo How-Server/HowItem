@@ -15,7 +15,6 @@ import tw.iehow.howitem.items.BaseHowItem;
 import tw.iehow.howitem.util.ItemSlotPair;
 import tw.iehow.howitem.util.check.ClaimCheck;
 import tw.iehow.howitem.util.check.EntityCheck;
-import tw.iehow.howitem.util.placeholder.register;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,8 @@ import java.util.Objects;
 public class HowItemInitializer implements ModInitializer {
     @Override
     public void onInitialize() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            new register().levelPlaceHolder();
-            CooldownManager.setServer(server);
-        });
-
+        ServerLifecycleEvents.SERVER_STARTED.register(CooldownManager::setServer);
         registerItem();
-
     }
 
     public void registerItem() {
