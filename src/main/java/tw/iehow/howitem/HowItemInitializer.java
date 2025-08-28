@@ -59,9 +59,9 @@ public class HowItemInitializer implements ModInitializer {
                 return ActionResult.PASS;
             }
 
-            for (BaseHowItem item : trigger) {
-                item.safeAttack(player, world, entity);
-            }
+//            for (BaseHowItem item : trigger) {
+//                item.safeAttack(player, world, entity);
+//            }
 
             if (ClaimCheck.attackEntity(player, entity)) {
                 return ActionResult.FAIL;

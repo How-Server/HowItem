@@ -37,8 +37,8 @@ public abstract class BaseHowItem {
     public void unsafeUse(PlayerEntity player, Hand hand) {
     }
 
-    public void safeAttack(PlayerEntity player, World world, Entity entity) {
-    }
+//    public void safeAttack(PlayerEntity player, World world, Entity entity) {
+//    }
 
     public void unsafeAttack(PlayerEntity player, World world, Entity entity) {
     }
