@@ -13,6 +13,7 @@ import tw.iehow.howitem.items.horn.DefaultHorn;
 
 @Mixin(GoatHornItem.class)
 public abstract class HornUse {
+    // after claim check
     @Inject(method = "use", at = @At("HEAD"))
     public void useHorn(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         DefaultHorn.use(user, hand);

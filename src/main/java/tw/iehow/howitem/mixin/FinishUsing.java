@@ -12,6 +12,7 @@ import tw.iehow.howitem.items.others.Lobster;
 
 @Mixin(Item.class)
 public abstract class FinishUsing {
+    // after claim check
     @Inject(method = "finishUsing", at = @At("HEAD"))
     public void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         Lobster.applyFly(stack, user);

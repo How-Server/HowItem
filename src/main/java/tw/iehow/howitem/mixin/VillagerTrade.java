@@ -17,6 +17,7 @@ import java.util.List;
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerTrade {
+    // after claim check
     @Inject(method = "beginTradeWith", at = @At("HEAD"), cancellable = true)
     public void limitVillager(PlayerEntity customer, CallbackInfo ci){
         VillagerEntity villager = (VillagerEntity) (Object) this;
@@ -28,7 +29,7 @@ public abstract class VillagerTrade {
             ci.cancel();
         }
     }
-
+    // after claim check
     @Inject(method = "beginTradeWith", at = @At("HEAD"))
     public void removeHeroEffect(PlayerEntity customer, CallbackInfo ci){
         VillagerEntity villager = (VillagerEntity) (Object) this;

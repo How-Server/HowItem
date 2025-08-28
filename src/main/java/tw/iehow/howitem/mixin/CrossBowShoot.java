@@ -14,6 +14,7 @@ import tw.iehow.howitem.items.vip.Y2024.HowBrella;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossBowShoot {
+    // after claim check
     @Inject(method = "shootAll", at = @At("HEAD"))
     public void afterShoot(World world, LivingEntity shooter, Hand hand, ItemStack stack, float speed, float divergence, LivingEntity target, CallbackInfo ci) {
         if (shooter instanceof PlayerEntity player) {

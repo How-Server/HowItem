@@ -10,7 +10,7 @@ import tw.iehow.howitem.items.others.HowTotem;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerDeath {
-
+    // no claim check needed
     @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
     public void beforeDeath(DamageSource damageSource, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;

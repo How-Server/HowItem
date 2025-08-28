@@ -24,6 +24,7 @@ public abstract class TickItem {
     @Unique
     private int tickCounter = 0;
 
+    // no claim check needed
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo info) {
         tickCounter++;

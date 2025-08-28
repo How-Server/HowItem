@@ -16,7 +16,8 @@ public abstract class BlockBreak {
     @Shadow @Final
     protected ServerPlayerEntity player;
 
-    @Inject(method = "tryBreakBlock", at = @At("HEAD"), cancellable = true)
+    // after claim check (canBreakBlock first)
+    @Inject(method = "tryBreakBlock", at = @At("HEAD"))
     private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         HowHook.use(player, pos);
     }

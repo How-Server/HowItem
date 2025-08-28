@@ -10,6 +10,7 @@ import tw.iehow.howitem.items.vip.Y2025.HowHelmet;
 
 @Mixin(LivingEntity.class)
 public abstract class DamageModify {
+    // after claim check
     @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float modifyDamage(float amount, ServerWorld world, DamageSource source) {
         LivingEntity self = (LivingEntity) (Object) this;
