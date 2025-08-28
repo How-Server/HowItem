@@ -42,7 +42,7 @@ public class HowItemInitializer implements ModInitializer {
             stacks.add(new ItemSlotPair(TriggerType.BODY, player.getEquippedStack(EquipmentSlot.BODY)));
             stacks.add(new ItemSlotPair(TriggerType.LEGS, player.getEquippedStack(EquipmentSlot.LEGS)));
             stacks.add(new ItemSlotPair(TriggerType.FEET, player.getEquippedStack(EquipmentSlot.FEET)));
-            BaseHowItem targetItem = null;
+            BaseHowItem targetItem;
 
             for (ItemSlotPair pair : stacks) {
                 CustomModelDataComponent cmd = pair.getStack().getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA);
