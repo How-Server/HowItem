@@ -13,6 +13,7 @@ import tw.iehow.howitem.items.vip.Y2025.PaintGun;
 
 @Mixin(Item.class)
 public abstract class WhileUsing {
+    // different from UseItem, it's called every tick, so player can have animation or sound
     // skip claim check
     @Inject(method = "usageTick", at = @At("HEAD"))
     public void whileUse(World world, LivingEntity user, ItemStack stack, int remainingUseTicks, CallbackInfo ci) {
