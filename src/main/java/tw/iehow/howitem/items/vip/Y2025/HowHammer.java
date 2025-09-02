@@ -29,7 +29,7 @@ public class HowHammer extends BaseHowItem {
 
         if (player.isSneaking() && nearGround && cd == 0) {
             PotionEffect.add(player, StatusEffects.LEVITATION, 3, 59);
-            CooldownManager.set(player.getUuid(), CooldownType.SWORD, 5, player, player.getMainHandStack());
+            CooldownManager.set(player.getUuid(), CooldownType.SWORD, 5);
         }
     }
 }
