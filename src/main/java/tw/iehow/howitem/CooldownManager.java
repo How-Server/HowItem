@@ -1,8 +1,5 @@
 package tw.iehow.howitem;
 
-import net.minecraft.entity.player.ItemCooldownManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import tw.iehow.howitem.enums.CooldownType;
 
@@ -22,13 +19,6 @@ public class CooldownManager {
     public static void set(UUID uuid, CooldownType type, long cd) {
         cooldown.computeIfAbsent(uuid, k -> new HashMap<>());
         cooldown.get(uuid).put(type, server.getTicks() + cd);
-    }
-
-    // add vanilla item cooldown
-    public static void set(UUID uuid, CooldownType type, long cd, PlayerEntity player, ItemStack stack) {
-        ItemCooldownManager itemCooldownManager = player.getItemCooldownManager();
-        itemCooldownManager.set(stack, (int) cd);
-        set(uuid, type, cd);
     }
 
     public static void setServer(MinecraftServer actualServer) {
